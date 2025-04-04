@@ -1,5 +1,6 @@
 import Navbar from "./components/navbar";
 import HomeComponent from "./components/home";
+import AboutComponent from "./components/about";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       </div>
       <div>
         <HomeComponent />
+        <AboutComponent />
       </div>
     </div>
   );
