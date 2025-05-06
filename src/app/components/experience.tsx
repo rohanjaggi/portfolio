@@ -1,5 +1,7 @@
 "use client"
 
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import 'react-vertical-timeline-component/style.min.css';
 import { Building2, GraduationCap } from 'lucide-react';
@@ -8,6 +10,9 @@ import { useTheme } from "next-themes";
 const ExperienceComponent = () => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, amount: 0.5 });
   
   const experiences = [
     {
@@ -60,14 +65,27 @@ const ExperienceComponent = () => {
       icon: <GraduationCap className="w-5 h-5" />,
       iconBackground: "#fff",
     },
-    // Add more experiences as needed
   ];
 
   return (
     <div className="py-24">
-      <h2 className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-gray-100">
-        Experience
-      </h2>
+      <motion.div
+        ref={headerRef}
+        initial={{ opacity: 0, y: -20 }}
+        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-col items-center mb-12"
+      >
+        <h2 className="text-3xl font-bold text-center mb-3 text-gray-900 dark:text-white">
+          Experience
+        </h2>
+        <motion.div 
+          initial={{ scaleX: 0 }}
+          animate={headerInView ? { scaleX: 1 } : { scaleX: 0 }}
+          transition={{ delay: 0.3, duration: 0.4 }}
+          className="w-20 h-1 bg-rose-900 dark:bg-rose-300 rounded mb-5 origin-left"
+        ></motion.div>
+      </motion.div>
       
       <style jsx global>{`
         .vertical-timeline::before {

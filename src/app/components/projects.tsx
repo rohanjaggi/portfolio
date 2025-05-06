@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Github, ExternalLink, ChevronRight } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Github, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -15,6 +15,12 @@ import {
 
 const ProjectsComponent = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  
+  const headerRef = useRef(null);
+  const projectsRef = useRef(null);
+  
+  const headerInView = useInView(headerRef, { once: true, amount: 0.5 });
+  const projectsInView = useInView(projectsRef, { once: true, amount: 0.1 });
 
   const projects = [
     {
@@ -56,12 +62,14 @@ const ProjectsComponent = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
+        delayChildren: 0.3, 
+        when: "beforeChildren"
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 50, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
@@ -76,21 +84,28 @@ const ProjectsComponent = () => {
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-16">
       <motion.div
+        ref={headerRef}
         initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
         transition={{ duration: 0.5 }}
         className="flex flex-col items-center mb-10"
       >
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
+        <h2 className="text-3xl font-bold text-center mb-3 text-gray-900 dark:text-white">
           Projects
         </h2>
-        <div className="w-20 h-1 bg-rose-900 dark:bg-rose-300 rounded mb-5"></div>
+        <motion.div 
+          initial={{ scaleX: 0 }}
+          animate={headerInView ? { scaleX: 1 } : { scaleX: 0 }}
+          transition={{ delay: 0.3, duration: 0.4 }}
+          className="w-20 h-1 bg-rose-900 dark:bg-rose-300 rounded mb-5 origin-left"
+        ></motion.div>
       </motion.div>
 
       <motion.div
+        ref={projectsRef}
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        animate={projectsInView ? "visible" : "hidden"}
         className="grid grid-cols-1 md:grid-cols-2 gap-6"
       >
         {projects.map((project, index) => (

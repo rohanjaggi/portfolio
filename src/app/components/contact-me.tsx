@@ -1,6 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Mail, Linkedin, ArrowRight } from "lucide-react";
 import {
   Card,
@@ -10,7 +11,12 @@ import {
 } from "@/components/ui/card";
 
 const ContactComponent = () => {
-  // You can remove the unused form state and handler
+  const headerRef = useRef(null);
+  const cardsRef = useRef(null);
+  
+  const headerInView = useInView(headerRef, { once: true, amount: 0.5 });
+  const cardsInView = useInView(cardsRef, { once: true, amount: 0.1 });
+  
   const contactMethods = [
     {
       icon: <Mail className="h-10 w-10 text-rose-900 dark:text-rose-300" />,
@@ -32,6 +38,8 @@ const ContactComponent = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
+        delayChildren: 0.3,
+        when: "beforeChildren"
       },
     },
   };
@@ -52,21 +60,28 @@ const ContactComponent = () => {
   return (
     <div className="w-full max-w-5xl mx-auto px-4 py-16">
       <motion.div
+        ref={headerRef}
         initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
         transition={{ duration: 0.5 }}
         className="flex flex-col items-center mb-10"
       >
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
+        <h2 className="text-3xl font-bold text-center mb-3 text-gray-900 dark:text-white">
           Contact Me
         </h2>
-        <div className="w-20 h-1 bg-rose-900 dark:bg-rose-300 rounded mb-5"></div>
+        <motion.div 
+          initial={{ scaleX: 0 }}
+          animate={headerInView ? { scaleX: 1 } : { scaleX: 0 }}
+          transition={{ delay: 0.3, duration: 0.4 }}
+          className="w-20 h-1 bg-rose-900 dark:bg-rose-300 rounded mb-5 origin-left"
+        ></motion.div>
       </motion.div>
 
       <motion.div
+        ref={cardsRef}
         variants={containerVariants}
         initial="hidden"
-        animate="visible" 
+        animate={cardsInView ? "visible" : "hidden"}
         className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto"
       >
         {contactMethods.map((method, index) => (
