@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Ovo, Outfit } from "next/font/google";
+import { Inter } from "next/font/google";
 import { ThemeProvider } from "./components/theme-provider"
 import "./globals.css";
 
-
- const OutfitFont = Outfit({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400"]
+  variable: "--font-inter",
+  display: "swap",
+  weight: ["400", "500", "600", "700"]
 });
 
-const OvoFont = Ovo({
-  subsets: ["latin"],
-  weight: ["400"]
-});
 
 export const metadata: Metadata = {
   title: "Rohan Jaggi Portfolio",
@@ -25,17 +22,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable}`}>
       <body>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
