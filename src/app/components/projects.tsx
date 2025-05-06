@@ -81,7 +81,7 @@ const ProjectsComponent = () => {
         transition={{ duration: 0.5 }}
         className="flex flex-col items-center mb-10"
       >
-        <h2 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
           Projects
         </h2>
         <div className="w-20 h-1 bg-rose-900 dark:bg-rose-300 rounded mb-5"></div>

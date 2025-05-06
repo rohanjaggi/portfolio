@@ -3,6 +3,8 @@ import HomeComponent from "./components/home";
 import AboutComponent from "./components/about";
 import ExperienceComponent from "./components/experience";
 import ProjectsComponent from "./components/projects";
+import ContactComponent from "./components/contact-me";
+import Footer from "./components/footer";
 
 export default function Home() {
   return (
@@ -15,6 +17,7 @@ export default function Home() {
         <AboutComponent />
         <ExperienceComponent />
         <ProjectsComponent />
+        <ContactComponent />
       </div>
     </div>
   );
