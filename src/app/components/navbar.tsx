@@ -1,9 +1,10 @@
 "use client"
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
+import { motion } from "framer-motion";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -14,6 +15,17 @@ import Link from "next/link";
 
 const Navbar = () => {
   const { setTheme, theme } = useTheme();
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const toggleTheme = () => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      setTheme(theme === 'dark' ? 'light' : 'dark');
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 300);
+    }, 150);
+  };
 
   return (
     <nav className="flex justify-center items-center mt-8 py-4 px-10">
@@ -66,17 +78,47 @@ const Navbar = () => {
             <div className="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-1"></div>
             
             <NavigationMenuItem className="ml-2">
-              <Button 
-                variant="outline" 
-                size="icon"
-                className="rounded-md p-2 bg-white dark:bg-gray-800 
+              <motion.button
+                onClick={toggleTheme}
+                disabled={isAnimating}
+                whileTap={{ scale: 0.9 }}
+                className="flex justify-center items-center w-10 h-10 rounded-md 
+                  bg-white dark:bg-gray-800
                   shadow-sm dark:shadow-gray-700
-                  border border-gray-200 dark:border-gray-700"
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                  border border-gray-200 dark:border-gray-700
+                  transition-colors"
               >
-                <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              </Button>
+                <motion.div
+                  initial={false}
+                  animate={{
+                    rotate: isAnimating ? [0, 90] : 0,
+                    scale: isAnimating ? [1, 0] : 1,
+                  }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute"
+                >
+                  {theme === 'dark' ? (
+                    <Moon className="h-5 w-5 text-blue-400" />
+                  ) : (
+                    <Sun className="h-5 w-5 text-amber-500" />
+                  )}
+                </motion.div>
+                <motion.div
+                  initial={{ scale: 0, rotate: -90 }}
+                  animate={{
+                    rotate: isAnimating ? [90, 0] : 90,
+                    scale: isAnimating ? [0, 1] : 0,
+                  }}
+                  transition={{ duration: 0.2, delay: 0.15 }}
+                  className="absolute"
+                >
+                  {theme === 'dark' ? (
+                    <Sun className="h-5 w-5 text-amber-500" />
+                  ) : (
+                    <Moon className="h-5 w-5 text-blue-400" />
+                  )}
+                </motion.div>
+              </motion.button>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

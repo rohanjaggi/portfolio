@@ -164,13 +164,12 @@ const HomeComponent = () => {
             <span className="text-2xl text-gray-700 dark:text-gray-300">Aspiring </span>
             <span className="text-2xl font-semibold text-rose-600 dark:text-rose-400 relative">
               {occupation}
-              <span className="absolute w-3 h-0.5 bottom-[-3px] right-[-4px] bg-rose-600 dark:bg-rose-400 animate-blink"></span>
             </span>
           </motion.div>
         </div>
         
         <motion.div 
-          className="flex flex-col md:flex-row gap-4 mt-8"
+          className="flex flex-col md:flex-row gap-4 mt-1"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
@@ -234,7 +233,7 @@ const HomeComponent = () => {
       </div>
       
       <motion.div 
-        className="absolute bottom-10"
+        className="absolute bottom-5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
@@ -246,7 +245,7 @@ const HomeComponent = () => {
             repeat: Infinity,
             repeatType: "loop" 
           }}
-          className="flex flex-col items-center space-y-2"
+          className="flex flex-col items-center space-y-1"
         >
           <span className="text-sm text-gray-500 dark:text-gray-400">Scroll to explore</span>
           <ArrowDownIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />

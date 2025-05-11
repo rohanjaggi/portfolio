@@ -53,7 +53,7 @@ const ExperienceComponent = () => {
       iconBackground: "#fff",
     },
     {
-      title: "Teaching Assistant",
+      title: "Business Analytics Teaching Assistant",
       company: "National University of Singapore",
       location: "Singapore",
       description: [

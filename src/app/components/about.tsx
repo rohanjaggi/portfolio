@@ -1,8 +1,8 @@
 "use client"
 
 import Image from "next/image";
-import { motion, useScroll, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 import {
   Card,
   CardContent
@@ -22,8 +22,31 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState } from "react";
-import { Code2, Server } from "lucide-react";
+import { Code2, Server, BrainCircuit, Wrench } from "lucide-react";
+
+import { 
+  SiReact, 
+  SiNextdotjs, 
+  SiVuedotjs, 
+  SiTypescript,
+  SiTailwindcss,
+  SiHtml5,
+  SiNodedotjs,
+  SiPython,
+  SiOpenjdk,
+  SiMysql,
+  SiSupabase,
+  SiFastapi,
+  SiFlask,
+  SiJupyter,
+  SiPandas,
+  SiNumpy,
+  SiPlotly,
+  SiTensorflow,
+  SiOpenai,
+  SiGit,
+  SiDocker,
+} from '@icons-pack/react-simple-icons';
 
 const CCAItem = ({ 
   logo, 
@@ -133,6 +156,21 @@ const EducationItem = ({
   );
 };
 
+const TechIcon = ({ name, icon }: { name: string, icon: React.ReactNode }) => (
+  <motion.div
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    transition={{ type: "spring", stiffness: 200 }}
+    className="flex flex-col items-center"
+    whileHover={{ y: -2 }}
+  >
+    <div className="bg-gray-50 dark:bg-gray-200 p-3 rounded-lg mb-2 flex items-center justify-center h-[60px] w-[60px] shadow-sm">
+      {icon}
+    </div>
+    <span className="text-sm text-center">{name}</span>
+  </motion.div>
+);
+
 const AboutComponent = () => {
   const [open, setOpen] = useState(false);
   
@@ -182,22 +220,46 @@ const AboutComponent = () => {
 
   const techStack = {
     frontend: [
-      { name: "React", logo: "react.svg" },
-      { name: "Next.js", logo: "next.svg" },
-      { name: "TypeScript", logo: "typescript.svg" },
-      { name: "Tailwind CSS", logo: "tailwind.svg" },
+      { name: "React", icon: <SiReact size={30} color="#61DAFB" /> },
+      { name: "Next.js", icon: <SiNextdotjs size={30} color="#000000" /> },
+      { name: "Vue.js", icon: <SiVuedotjs size={30} color="#4FC08D" /> },
+      { name: "TypeScript", icon: <SiTypescript size={30} color="#3178C6" /> },
+      { name: "Tailwind CSS", icon: <SiTailwindcss size={30} color="#06B6D4" /> },
+      { name: "HTML/CSS", icon: <SiHtml5 size={30} color="#E34F26" /> }
     ],
     backend: [
-      { name: "Node.js", logo: "node.svg" },
-      { name: "Python", logo: "python.svg" },
-      { name: "Java", logo: "java.svg" },
-      { name: "PostgreSQL", logo: "postgres.svg" },
+      { name: "Node.js", icon: <SiNodedotjs size={30} color="#339933" /> },
+      { name: "Python", icon: <SiPython size={30} color="#3776AB" /> },
+      { name: "Java", icon: <SiOpenjdk size={30} color="#007396" /> },
+      { name: "MySQL", icon: <SiMysql size={30} color="#4479A1" /> },
+      { name: "Supabase", icon: <SiSupabase size={30} color="#3ECF8E" /> },
+      { name: "FastAPI", icon: <SiFastapi size={30} color="#009688" /> },
+      { name: "Flask", icon: <SiFlask size={30} color="#000000" /> }
+    ],
+    dataScience: [
+      { name: "Jupyter", icon: <SiJupyter size={30} color="#F37626" /> },
+      { name: "Pandas", icon: <SiPandas size={30} color="#150458" /> },
+      { name: "NumPy", icon: <SiNumpy size={30} color="#013243" /> },
+      { name: "Matplotlib", icon: <SiPlotly size={30} color="#3F4F75" /> },
+      { name: "TensorFlow", icon: <SiTensorflow size={30} color="#FF6F00" /> },
+      { name: "OpenAI API", icon: <SiOpenai size={30} color="#412991" /> }
     ],
     tools: [
-      { name: "Git", logo: "git.svg" },
-      { name: "Docker", logo: "docker.svg" },
-      { name: "VS Code", logo: "vscode.svg" },
-      { name: "Jupyter", logo: "jupyter.svg" },
+      { name: "Git", icon: <SiGit size={30} color="#F05032" /> },
+      { name: "Docker", icon: <SiDocker size={30} color="#2496ED" /> },
+      { 
+        name: "VS Code", 
+        icon: (
+          <div className="flex items-center justify-center w-full h-full">
+            <Image
+              src="/logos/vscode.svg"
+              alt="VS Code logo"
+              width={30}
+              height={30}
+            />
+          </div>
+        ) 
+      }
     ]
   };
 
@@ -312,125 +374,94 @@ const AboutComponent = () => {
                   View My Tech Stack
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-xl">
-                <DialogHeader>
-                  <DialogTitle className="text-2xl font-bold text-center mb-2">
+              <DialogContent className="max-w-[75vw] sm:max-w-6xl max-h-[95vh] overflow-y-auto px-10 pt-8">
+                <DialogHeader className="sticky top-0 backdrop-blur-md bg-white/90 dark:bg-gray-950/90 pb-2 z-10 pt-0">
+                  <DialogTitle className="text-2xl font-bold text-center mb-1">
                     Tech Stack
                   </DialogTitle>
-                  <DialogDescription className="text-center text-base text-gray-600 dark:text-gray-400 mb-5">
+                  <DialogDescription className="text-center text-sm text-gray-600 dark:text-gray-400 mb-1">
                     Technologies I work with
                   </DialogDescription>
+                  <div className="w-16 h-1 bg-rose-900 dark:bg-rose-300 rounded mx-auto mb-2"></div>
                 </DialogHeader>
 
-                <div className="grid gap-8">
-                  {/* Frontend section with animations */}
+                <div className="grid gap-6 py-0">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <div className="flex items-center gap-2 mb-3">
-                      <Code2 className="w-5 h-5" />
+                    <div className="flex items-center gap-2 mb-2">
+                      <Code2 className="w-5 h-5 text-rose-900 dark:text-rose-300" />
                       <h3 className="font-semibold text-lg">Frontend</h3>
                     </div>
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-4">
                       {techStack.frontend.map((tech, index) => (
-                        <motion.div
-                          key={index}
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: 0.1 * index, type: "spring", stiffness: 200 }}
-                          className="flex flex-col items-center"
-                        >
-                          <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg mb-2">
-                            <Image
-                              src={`/logos/${tech.logo}`}
-                              alt={`${tech.name} logo`}
-                              width={40}
-                              height={40}
-                            />
-                          </div>
-                          <span className="text-sm">{tech.name}</span>
-                        </motion.div>
+                        <TechIcon 
+                          key={index} 
+                          name={tech.name} 
+                          icon={tech.icon} 
+                        />
                       ))}
                     </div>
                   </motion.div>
 
-                  {/* Backend section with animations */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.4 }}
                   >
-                    <div className="flex items-center gap-2 mb-3">
-                      <Server className="w-5 h-5" />
+                    <div className="flex items-center gap-2 mb-2">
+                      <Server className="w-5 h-5 text-rose-900 dark:text-rose-300" />
                       <h3 className="font-semibold text-lg">Backend</h3>
                     </div>
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-4">
                       {techStack.backend.map((tech, index) => (
-                        <motion.div
-                          key={index}
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: 0.1 * index + 0.3, type: "spring", stiffness: 200 }}
-                          className="flex flex-col items-center"
-                        >
-                          <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg mb-2">
-                            <Image
-                              src={`/logos/${tech.logo}`}
-                              alt={`${tech.name} logo`}
-                              width={40}
-                              height={40}
-                            />
-                          </div>
-                          <span className="text-sm">{tech.name}</span>
-                        </motion.div>
+                        <TechIcon 
+                          key={index} 
+                          name={tech.name} 
+                          icon={tech.icon} 
+                        />
                       ))}
                     </div>
                   </motion.div>
 
-                  {/* Tools section with animations */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.4 }}
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <BrainCircuit className="w-5 h-5 text-rose-900 dark:text-rose-300" />
+                      <h3 className="font-semibold text-lg">Data Science</h3>
+                    </div>
+                    <div className="grid grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-4">
+                      {techStack.dataScience.map((tech, index) => (
+                        <TechIcon 
+                          key={index} 
+                          name={tech.name} 
+                          icon={tech.icon} 
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.4 }}
                   >
-                    <div className="flex items-center gap-2 mb-3">
-                      <svg
-                        className="w-5 h-5"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M10.5 20.5L10.5 3.5M10.5 3.5L6 8.5M10.5 3.5L15 8.5"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Wrench className="w-5 h-5 text-rose-900 dark:text-rose-300" />
                       <h3 className="font-semibold text-lg">Tools</h3>
                     </div>
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-4">
                       {techStack.tools.map((tech, index) => (
-                        <motion.div
-                          key={index}
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: 0.1 * index + 0.5, type: "spring", stiffness: 200 }}
-                          className="flex flex-col items-center"
-                        >
-                          <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg mb-2">
-                            <Image
-                              src={`/logos/${tech.logo}`}
-                              alt={`${tech.name} logo`}
-                              width={40}
-                              height={40}
-                            />
-                          </div>
-                          <span className="text-sm">{tech.name}</span>
-                        </motion.div>
+                        <TechIcon 
+                          key={index} 
+                          name={tech.name} 
+                          icon={tech.icon} 
+                        />
                       ))}
                     </div>
                   </motion.div>
