@@ -264,7 +264,7 @@ const AboutComponent = () => {
   };
 
   return (
-    <div className="py-12 px-4 sm:px-6 md:px-8">
+    <div id="about" className="py-12 px-4 sm:px-6 md:px-8">
       <motion.div 
         ref={headerRef}
         initial={{ opacity: 0, y: -20 }}
@@ -374,7 +374,7 @@ const AboutComponent = () => {
                   View My Tech Stack
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-[75vw] sm:max-w-6xl max-h-[95vh] overflow-y-auto px-10 pt-8">
+              <DialogContent className="max-w-[85vw] sm:max-w-5xl max-h-[95vh] overflow-y-auto px-10 pt-8">
                 <DialogHeader className="sticky top-0 backdrop-blur-md bg-white/90 dark:bg-gray-950/90 pb-2 z-10 pt-0">
                   <DialogTitle className="text-2xl font-bold text-center mb-1">
                     Tech Stack

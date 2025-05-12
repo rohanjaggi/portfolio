@@ -68,7 +68,7 @@ const ExperienceComponent = () => {
   ];
 
   return (
-    <div className="py-24">
+    <div id="experience" className="py-24">
       <motion.div
         ref={headerRef}
         initial={{ opacity: 0, y: -20 }}

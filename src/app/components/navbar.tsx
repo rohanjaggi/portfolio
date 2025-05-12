@@ -1,7 +1,6 @@
 "use client"
 
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import React, { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
@@ -16,6 +15,31 @@ import Link from "next/link";
 const Navbar = () => {
   const { setTheme, theme } = useTheme();
   const [isAnimating, setIsAnimating] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  
+  useEffect(() => {
+    const sections = ['home', 'about', 'experience', 'projects', 'contact'];
+    
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, { threshold: 0.3 }); 
+    
+    sections.forEach(sectionId => {
+      const element = document.getElementById(sectionId);
+      if (element) sectionObserver.observe(element);
+    });
+    
+    return () => {
+      sections.forEach(sectionId => {
+        const element = document.getElementById(sectionId);
+        if (element) sectionObserver.unobserve(element);
+      });
+    };
+  }, []);
 
   const toggleTheme = () => {
     setIsAnimating(true);
@@ -27,52 +51,105 @@ const Navbar = () => {
     }, 150);
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(sectionId);
+    }
+  };
+
   return (
     <nav className="flex justify-center items-center mt-8 py-4 px-10">
       <div className="fixed z-50">
         <NavigationMenu>
-          <NavigationMenuList className="flex items-center justify-center gap-4 rounded-md px-5 py-1.5 
+          <NavigationMenuList className="flex items-center justify-center gap-2 rounded-md px-5 py-1.5 
             bg-white/80 dark:bg-gray-800/80 
             shadow-sm dark:shadow-gray-700
             border border-gray-200 dark:border-gray-700
             backdrop-blur-sm">
             <NavigationMenuItem className="mr-2">
-              <Link href="/" legacyBehavior passHref>
-                <NavigationMenuLink className="text-lg font-bold text-rose-900 hover:text-rose-800 dark:text-rose-300 dark:hover:text-rose-200 transition-colors">
-                  Rohan Jaggi
-                </NavigationMenuLink>
-              </Link>
+              <a 
+                href="#home" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('home');
+                }}
+                className={`px-3 py-1.5 rounded-md text-lg font-bold text-rose-900 hover:text-rose-800 dark:text-rose-300 dark:hover:text-rose-200 transition-colors ${
+                  activeSection === 'home' 
+                    ? 'bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600' 
+                    : 'hover:bg-gray-100/60 dark:hover:bg-gray-700/30'
+                }`}
+              >
+                Rohan Jaggi
+              </a>
             </NavigationMenuItem>
             
             <div className="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-1"></div>
             
             <NavigationMenuItem>
-              <Link href="/about" legacyBehavior passHref>
-                <NavigationMenuLink className="text-md font-bold text-gray-600 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400 transition-colors">
-                  About Me
-                </NavigationMenuLink>
-              </Link>
+              <a 
+                href="#about" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('about');
+                }}
+                className={`px-3 py-1.5 rounded-md text-md font-medium transition-all ${
+                  activeSection === 'about' 
+                    ? 'text-rose-900 dark:text-rose-300 bg-rose-100/60 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/40' 
+                    : 'text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100/60 dark:hover:bg-gray-700/30'
+                }`}
+              >
+                About Me
+              </a>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/experience" legacyBehavior passHref>
-                <NavigationMenuLink className="text-md font-bold text-gray-600 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400 transition-colors">
-                  Experience
-                </NavigationMenuLink>
-              </Link>
+              <a 
+                href="#experience" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('experience');
+                }}
+                className={`px-3 py-1.5 rounded-md text-md font-medium transition-all ${
+                  activeSection === 'experience' 
+                    ? 'text-rose-900 dark:text-rose-300 bg-rose-100/60 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/40' 
+                    : 'text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100/60 dark:hover:bg-gray-700/30'
+                }`}
+              >
+                Experience
+              </a>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/projects" legacyBehavior passHref>
-                <NavigationMenuLink className="text-md font-bold text-gray-600 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400 transition-colors">
-                  Projects
-                </NavigationMenuLink>
-              </Link>
+              <a 
+                href="#projects" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('projects');
+                }}
+                className={`px-3 py-1.5 rounded-md text-md font-medium transition-all ${
+                  activeSection === 'projects' 
+                    ? 'text-rose-900 dark:text-rose-300 bg-rose-100/60 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/40' 
+                    : 'text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100/60 dark:hover:bg-gray-700/30'
+                }`}
+              >
+                Projects
+              </a>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/contact" legacyBehavior passHref>
-                <NavigationMenuLink className="text-md font-bold text-gray-600 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400 transition-colors">
-                  Contact
-                </NavigationMenuLink>
-              </Link>
+              <a 
+                href="#contact" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('contact');
+                }}
+                className={`px-3 py-1.5 rounded-md text-md font-medium transition-all ${
+                  activeSection === 'contact' 
+                    ? 'text-rose-900 dark:text-rose-300 bg-rose-100/60 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800/40' 
+                    : 'text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100/60 dark:hover:bg-gray-700/30'
+                }`}
+              >
+                Contact
+              </a>
             </NavigationMenuItem>
             
             <div className="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-1"></div>

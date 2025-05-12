@@ -82,7 +82,7 @@ const ProjectsComponent = () => {
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 py-16">
+    <div id="projects" className="w-full max-w-5xl mx-auto px-4 py-16">
       <motion.div
         ref={headerRef}
         initial={{ opacity: 0, y: -20 }}

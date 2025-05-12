@@ -59,7 +59,7 @@ const HomeComponent = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen">
+    <div id="home" className="flex flex-col justify-center items-center min-h-screen">
       <div className="flex flex-col items-center space-y-8 mb-16">
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
