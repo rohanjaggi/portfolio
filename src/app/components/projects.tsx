@@ -24,7 +24,7 @@ const ProjectsComponent = () => {
 
   const projects = [
     {
-      title: "ML Forecasting Platform",
+      title: "Resurect",
       description: "Time series forecasting platform that uses advanced ML algorithms to predict future trends with high accuracy.",
       image: "/projects/project1.jpg", 
       tags: ["Python", "TensorFlow", "FastAPI", "React"],
@@ -32,7 +32,7 @@ const ProjectsComponent = () => {
       live: "https://project1-demo.com",
     },
     {
-      title: "Data Visualization Dashboard",
+      title: "Nomsters",
       description: "Interactive dashboard for real-time data visualization with customizable charts and filtering capabilities.",
       image: "/projects/project2.jpg",
       tags: ["D3.js", "React", "Node.js", "MongoDB"],
@@ -40,14 +40,14 @@ const ProjectsComponent = () => {
       live: "https://project2-demo.com",
     },
     {
-      title: "NLP Document Analyzer",
+      title: "NUS Buffet Buddy",
       description: "AI-powered text analysis tool that extracts insights, sentiment, and key topics from large document collections.",
       image: "/projects/project3.jpg",
       tags: ["Python", "Spacy", "BERT", "Flask", "Vue.js"],
       github: "https://github.com/rohanjaggi/project3",
     },
     {
-      title: "Recommendation Engine",
+      title: "HashGen for TikTok",
       description: "Content recommendation system using collaborative filtering and deep learning to deliver personalized suggestions.",
       image: "/projects/project4.jpg",
       tags: ["PyTorch", "AWS", "GraphQL", "TypeScript"],

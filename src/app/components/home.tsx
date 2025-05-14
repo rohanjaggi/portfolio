@@ -73,7 +73,6 @@ const HomeComponent = () => {
           whileHover={{ scale: 1.05 }}
           className="relative"
         >
-          {/* Elegant frame element */}
           <motion.div 
             className="absolute inset-[-20px] rounded-full"
             initial={{ opacity: 0 }}

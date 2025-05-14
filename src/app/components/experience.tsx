@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
@@ -23,7 +24,15 @@ const ExperienceComponent = () => {
         "To be continued..."
       ],
       date: "May 2025 - Aug 2025",
-      icon: <Building2 className="w-5 h-5" />,
+      icon: <div className="flex items-center justify-center w-full h-full">
+              <Image 
+                src="/logos/singtel.png" 
+                alt="Singtel Logo" 
+                width={50} 
+                height={50} 
+                className="relative z-10 transition-all duration-500"
+              />
+            </div>,
       iconBackground: "#fff",
     },
     {
@@ -36,7 +45,15 @@ const ExperienceComponent = () => {
         "Developed predictive models using Python"
       ],
       date: "Jan 2025 - May 2025",
-      icon: <GraduationCap className="w-5 h-5" />,
+      icon: <div className="flex items-center justify-center w-full h-full">
+              <Image 
+                src="/logos/qumo.jpeg" 
+                alt="Qumo AI Logo" 
+                width={50} 
+                height={50} 
+                className="relative z-10 transition-all duration-500 rounded-full"
+              />
+            </div>,
       iconBackground: "#fff",
     },
     {
@@ -49,7 +66,15 @@ const ExperienceComponent = () => {
         "Developed predictive models using Python"
       ],
       date: "Jun 2024 - Jul 2025",
-      icon: <GraduationCap className="w-5 h-5" />,
+      icon: <div className="flex items-center justify-center w-full h-full">
+              <Image 
+                src="/logos/nus.png" 
+                alt="NUS Logo" 
+                width={30} 
+                height={30} 
+                className="relative z-10 transition-all duration-500"
+              />
+            </div>,
       iconBackground: "#fff",
     },
     {
@@ -62,7 +87,15 @@ const ExperienceComponent = () => {
         "Developed predictive models using Python"
       ],
       date: "Aug 2024 - May 2025",
-      icon: <GraduationCap className="w-5 h-5" />,
+      icon: <div className="flex items-center justify-center w-full h-full">
+              <Image 
+                src="/logos/nus.png" 
+                alt="NUS Logo" 
+                width={30} 
+                height={30} 
+                className="relative z-10 transition-all duration-500"
+              />
+            </div>,
       iconBackground: "#fff",
     },
   ];
