@@ -248,18 +248,31 @@ const AboutComponent = () => {
       { name: "Git", icon: <SiGit size={30} color="#F05032" /> },
       { name: "Docker", icon: <SiDocker size={30} color="#2496ED" /> },
       { 
-        name: "VS Code", 
-        icon: (
-          <div className="flex items-center justify-center w-full h-full">
-            <Image
-              src="/logos/vscode.svg"
-              alt="VS Code logo"
-              width={30}
-              height={30}
-            />
-          </div>
-        ) 
-      }
+      name: "VS Code", 
+      icon: (
+        <div className="flex items-center justify-center w-full h-full">
+          <Image
+            src="/logos/vscode.svg"
+            alt="VS Code logo"
+            width={30}
+            height={30}
+          />
+        </div>
+      ) 
+    },
+    { 
+      name: "Microsoft Azure", 
+      icon: (
+        <div className="flex items-center justify-center w-full h-full">
+          <Image
+            src="/logos/azure.png"
+            alt="Microsoft Azure logo"
+            width={30}
+            height={30}
+          />
+        </div>
+      ) 
+    }
     ]
   };
 

@@ -5,7 +5,6 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import 'react-vertical-timeline-component/style.min.css';
-import { Building2, GraduationCap } from 'lucide-react';
 import { useTheme } from "next-themes";
 
 const ExperienceComponent = () => {
@@ -17,14 +16,14 @@ const ExperienceComponent = () => {
   
   const experiences = [
     {
-      title: "Digital AI Software Engineering Intern",
+      title: "AI Engineer Intern",
       company: "Singtel",
       location: "Singapore",
       description: [
         "To be continued..."
       ],
       date: "May 2025 - Aug 2025",
-      icon: <div className="flex items-center justify-center w-full h-full">
+      icon: <div className="flex items-center justify-center w-full h-full rounded-full shadow-inner p-1">
               <Image 
                 src="/logos/singtel.png" 
                 alt="Singtel Logo" 
@@ -45,7 +44,7 @@ const ExperienceComponent = () => {
         "Developed predictive models using Python"
       ],
       date: "Jan 2025 - May 2025",
-      icon: <div className="flex items-center justify-center w-full h-full">
+      icon: <div className="flex items-center justify-center w-full h-full rounded-full shadow-inner p-1">
               <Image 
                 src="/logos/qumo.jpeg" 
                 alt="Qumo AI Logo" 
@@ -66,7 +65,7 @@ const ExperienceComponent = () => {
         "Developed predictive models using Python"
       ],
       date: "Jun 2024 - Jul 2025",
-      icon: <div className="flex items-center justify-center w-full h-full">
+      icon: <div className="flex items-center justify-center w-full h-full rounded-full shadow-inner p-1">
               <Image 
                 src="/logos/nus.png" 
                 alt="NUS Logo" 
@@ -87,7 +86,7 @@ const ExperienceComponent = () => {
         "Developed predictive models using Python"
       ],
       date: "Aug 2024 - May 2025",
-      icon: <div className="flex items-center justify-center w-full h-full">
+      icon: <div className="flex items-center justify-center w-full h-full rounded-full shadow-inner p-1">
               <Image 
                 src="/logos/nus.png" 
                 alt="NUS Logo" 

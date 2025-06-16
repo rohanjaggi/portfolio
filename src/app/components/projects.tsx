@@ -26,7 +26,7 @@ const ProjectsComponent = () => {
     {
       title: "Resurect",
       description: "Time series forecasting platform that uses advanced ML algorithms to predict future trends with high accuracy.",
-      image: "/projects/project1.jpg", 
+      image: "/logos/resurect.png", 
       tags: ["Python", "TensorFlow", "FastAPI", "React"],
       github: "https://github.com/rohanjaggi/project1",
       live: "https://project1-demo.com",
@@ -42,14 +42,14 @@ const ProjectsComponent = () => {
     {
       title: "NUS Buffet Buddy",
       description: "AI-powered text analysis tool that extracts insights, sentiment, and key topics from large document collections.",
-      image: "/projects/project3.jpg",
+      image: "/logos/buffet-buddy.png",
       tags: ["Python", "Spacy", "BERT", "Flask", "Vue.js"],
       github: "https://github.com/rohanjaggi/project3",
     },
     {
       title: "HashGen for TikTok",
       description: "Content recommendation system using collaborative filtering and deep learning to deliver personalized suggestions.",
-      image: "/projects/project4.jpg",
+      image: "/logos/tiktok.png",
       tags: ["PyTorch", "AWS", "GraphQL", "TypeScript"],
       github: "https://github.com/rohanjaggi/project4",
       live: "https://project4-demo.com",

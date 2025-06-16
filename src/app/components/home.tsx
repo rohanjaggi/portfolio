@@ -9,7 +9,7 @@ const HomeComponent = () => {
   const [occupation, setOccupation] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const occupations = ["ML Engineer", "Data Scientist", "Software Engineer"];
+  const occupations = ["ML Engineer", "Data Scientist"];
   const [delta, setDelta] = useState(150);
   const [isPaused, setIsPaused] = useState(false);
   const pauseDuration = 2000; 
