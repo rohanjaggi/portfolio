@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useRef } from "react";
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -25,34 +24,32 @@ const ProjectsComponent = () => {
   const projects = [
     {
       title: "Resurect",
-      description: "Time series forecasting platform that uses advanced ML algorithms to predict future trends with high accuracy.",
+      description: "Resume optimiser leveraging ML for individuals to receive tailored insights into their skills, and targeted recommendations.",
       image: "/logos/resurect.png", 
-      tags: ["Python", "TensorFlow", "FastAPI", "React"],
-      github: "https://github.com/rohanjaggi/project1",
-      live: "https://project1-demo.com",
+      tags: ["Python", "FastAPI", "jobLib", "SpaCy", "React", "TailWind CSS"],
+      github: "https://github.com/pastchum/htmlheroes",
+      live: "https://youtu.be/HGL1Ke0WO5k",
     },
     {
       title: "Nomsters",
-      description: "Interactive dashboard for real-time data visualization with customizable charts and filtering capabilities.",
+      description: "Full-stack application for discovering and sharing food places in Singapore, featuring reviews, and a dynamic map interface.",
       image: "/projects/project2.jpg",
-      tags: ["D3.js", "React", "Node.js", "MongoDB"],
-      github: "https://github.com/rohanjaggi/project2",
-      live: "https://project2-demo.com",
+      tags: ["Vue.js", "Vite", "Firebase", "PrimeVue", "Google Maps API"],
+      live: "https://nomster-13cf2.web.app/",
     },
     {
       title: "NUS Buffet Buddy",
-      description: "AI-powered text analysis tool that extracts insights, sentiment, and key topics from large document collections.",
+      description: "Full-stack application designed to reduce food waste in NUS by advertising extra food to the wider NUS public to consume.",
       image: "/logos/buffet-buddy.png",
-      tags: ["Python", "Spacy", "BERT", "Flask", "Vue.js"],
-      github: "https://github.com/rohanjaggi/project3",
+      tags: ["React Native", "TypeScript", "Firebase"],
+      github: "https://github.com/rohanjaggi/NUS-Buffet-Buddy",
     },
     {
       title: "HashGen for TikTok",
-      description: "Content recommendation system using collaborative filtering and deep learning to deliver personalized suggestions.",
+      description: "TikTok video hashtag generator using ML for creators to boost visibility and engagement of their content.",
       image: "/logos/tiktok.png",
-      tags: ["PyTorch", "AWS", "GraphQL", "TypeScript"],
-      github: "https://github.com/rohanjaggi/project4",
-      live: "https://project4-demo.com",
+      tags: ["React", "Next.js", "Python", "Hugging Face", "OpenAI"],
+      github: "https://github.com/jensenhuangyankai/tiktok-techjam2024"
     },
   ];
 

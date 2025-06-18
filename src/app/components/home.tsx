@@ -161,7 +161,7 @@ const HomeComponent = () => {
             className="h-8" 
           >
             <span className="text-2xl text-gray-700 dark:text-gray-300">Aspiring </span>
-            <span className="text-2xl font-semibold text-rose-600 dark:text-rose-400 relative">
+            <span className="text-2xl font-semibold text-rose-800 dark:text-rose-400 relative">
               {occupation}
             </span>
           </motion.div>

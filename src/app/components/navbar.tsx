@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList
 } from "@/components/ui/navigation-menu";
 
@@ -70,7 +69,6 @@ const Navbar = () => {
   return (
     <nav className="flex justify-center items-center mt-8 py-4 px-5 sm:px-10">
       <div className="fixed z-50">
-        {/* Desktop Navigation */}
         <div className="hidden sm:block">
           <NavigationMenu>
             <NavigationMenuList className="flex items-center justify-center gap-2 rounded-md px-5 py-1.5 
@@ -165,7 +163,6 @@ const Navbar = () => {
           </NavigationMenu>
         </div>
 
-        {/* Mobile Navigation */}
         <div className="sm:hidden">
           <div className="flex items-center justify-between gap-2 rounded-md px-4 py-2 
             bg-white/80 dark:bg-gray-800/80 
@@ -185,7 +182,6 @@ const Navbar = () => {
             </a>
 
             <div className="flex items-center gap-2">
-              {/* Theme Toggle Button */}
               <motion.button
                 onClick={toggleTheme}
                 disabled={isAnimating}
@@ -227,8 +223,6 @@ const Navbar = () => {
                   )}
                 </motion.div>
               </motion.button>
-
-              {/* Mobile Menu Toggle Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="flex justify-center items-center w-9 h-9 rounded-md 
@@ -246,19 +240,19 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Dropdown */}
           <AnimatePresence>
             {mobileMenuOpen && (
               <motion.div
-                initial={{ opacity: 0, height: 0, y: -20 }}
-                animate={{ opacity: 1, height: 'auto', y: 0 }}
-                exit={{ opacity: 0, height: 0, y: -20 }}
+                initial={{ opacity: 0, y: -10, scaleY: 0 }}
+                animate={{ opacity: 1, y: 0, scaleY: 1 }}
+                exit={{ opacity: 0, y: -10, scaleY: 0 }}
                 transition={{ duration: 0.3 }}
-                className="mt-2 rounded-md overflow-hidden
+                className="absolute left-0 right-0 mt-2 rounded-md overflow-hidden
                   bg-white/90 dark:bg-gray-800/90 
                   shadow-md dark:shadow-gray-700
                   border border-gray-200 dark:border-gray-700
-                  backdrop-blur-sm"
+                  backdrop-blur-sm
+                  origin-top"
               >
                 <div className="py-2">
                   {navItems.map((item) => (
@@ -268,8 +262,9 @@ const Navbar = () => {
                       onClick={(e) => {
                         e.preventDefault();
                         scrollToSection(item.id);
+                        setMobileMenuOpen(false);
                       }}
-                      className={`block px-5 py-2.5 text-md font-medium transition-all ${
+                      className={`block px-5 py-3 text-md font-medium transition-all ${
                         activeSection === item.id
                           ? 'text-rose-900 dark:text-rose-300 bg-rose-100/60 dark:bg-rose-900/20' 
                           : 'text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100/60 dark:hover:bg-gray-700/30'
