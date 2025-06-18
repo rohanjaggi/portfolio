@@ -20,7 +20,9 @@ const ExperienceComponent = () => {
       company: "Singtel",
       location: "Singapore",
       description: [
-        "To be continued..."
+        "Designed and deployed a Python-based AI evaluation service using Flask which evaluates automated voice-bot call transcripts against 9 key LLM evaluation metrics",
+        "Leveraged various evaluation libraries to enable real-time scoring of over 5000 calls per month",
+        "Collaborated with cross-functional teams to refine requirements and metrics"
       ],
       date: "May 2025 - Aug 2025",
       icon: <div className="flex items-center justify-center w-full h-full rounded-full shadow-inner p-1">
@@ -39,9 +41,9 @@ const ExperienceComponent = () => {
       company: "Qumo AI",
       location: "Singapore",
       description: [
-        "Conducted research on machine learning algorithms",
-        "Published paper in international conference",
-        "Developed predictive models using Python"
+        "Designing, developing, and maintaining AI-driven conversational forms",
+        "Implemented responsive, user-friendly interfaces and dynamic features with Tailwind CSS and RadixUI",
+        "Leading end-to-end feature development from ideation to deployment, including leveraging OpenAI technologies"
       ],
       date: "Jan 2025 - May 2025",
       icon: <div className="flex items-center justify-center w-full h-full rounded-full shadow-inner p-1">
@@ -60,9 +62,9 @@ const ExperienceComponent = () => {
       company: "National University of Singapore",
       location: "Singapore",
       description: [
-        "Conducted research on machine learning algorithms",
-        "Published paper in international conference",
-        "Developed predictive models using Python"
+        "Co-author of a research paper targeted for publication in 2025 with a NUS Business Professor",
+        "Conducted comprehensive research, data cleaning and analysis to identify key regulatory impacts on Indian cement emissions",
+        "Applied advanced synthetic control methods using Stata and R/RStudio to create models tracking and predicting emissions trends"
       ],
       date: "Jun 2024 - Jul 2025",
       icon: <div className="flex items-center justify-center w-full h-full rounded-full shadow-inner p-1">
@@ -81,9 +83,9 @@ const ExperienceComponent = () => {
       company: "National University of Singapore",
       location: "Singapore",
       description: [
-        "Conducted research on machine learning algorithms",
-        "Published paper in international conference",
-        "Developed predictive models using Python"
+        "Taught practical tutorials and facilitated coaching sessions for 30 students",
+        "Enhanced proficiency in R by applying business/data analytics techniques to real-life datasets",
+        "Achieved 15% improvements in average student grades with a teaching rating of 4.75/5 through personalised tutoring"
       ],
       date: "Aug 2024 - May 2025",
       icon: <div className="flex items-center justify-center w-full h-full rounded-full shadow-inner p-1">
