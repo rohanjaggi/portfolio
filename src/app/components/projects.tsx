@@ -33,7 +33,7 @@ const ProjectsComponent = () => {
     {
       title: "Nomsters",
       description: "Full-stack application for discovering and sharing food places in Singapore, featuring reviews, and a dynamic map interface.",
-      image: "/projects/project2.jpg",
+      image: "/logos/nomster.png",
       tags: ["Vue.js", "Vite", "Firebase", "PrimeVue", "Google Maps API"],
       live: "https://nomster-13cf2.web.app/",
     },
@@ -116,9 +116,9 @@ const ProjectsComponent = () => {
             <Card className="h-full overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-300 flex flex-col">
               <div className="relative h-48 overflow-hidden">
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10 opacity-60"
+                  className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-10 opacity-30"
                   animate={{
-                    opacity: hoveredIndex === index ? 0.8 : 0.6,
+                    opacity: hoveredIndex === index ? 0.4 : 0.2,
                   }}
                   transition={{ duration: 0.3 }}
                 />
@@ -126,8 +126,10 @@ const ProjectsComponent = () => {
                   className="h-full w-full bg-gray-100 dark:bg-gray-800"
                   style={{
                     backgroundImage: `url(${project.image})`,
-                    backgroundSize: 'cover',
+                    backgroundSize: project.title === "Nomsters" ? 'contain' : 'cover',
                     backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundColor: project.title === "Nomsters" ? '#f0f1f3' : undefined
                   }}
                   animate={{
                     scale: hoveredIndex === index ? 1.05 : 1,
