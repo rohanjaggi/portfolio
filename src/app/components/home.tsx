@@ -230,26 +230,6 @@ const HomeComponent = () => {
           ))}
         </motion.div>
       </div>
-      
-      <motion.div 
-        className="absolute bottom-5"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ 
-            duration: 1.5, 
-            repeat: Infinity,
-            repeatType: "loop" 
-          }}
-          className="flex flex-col items-center space-y-1"
-        >
-          <span className="text-sm text-gray-500 dark:text-gray-400">Scroll to explore</span>
-          <ArrowDownIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-        </motion.div>
-      </motion.div>
     </div>
   );
 }

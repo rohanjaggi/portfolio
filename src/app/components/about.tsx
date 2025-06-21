@@ -164,10 +164,10 @@ const TechIcon = ({ name, icon }: { name: string, icon: React.ReactNode }) => (
     className="flex flex-col items-center"
     whileHover={{ y: -2 }}
   >
-    <div className="bg-gray-50 dark:bg-gray-200 p-3 rounded-lg mb-2 flex items-center justify-center h-[60px] w-[60px] shadow-sm">
+    <div className="bg-gray-50 dark:bg-gray-200 p-2 sm:p-3 rounded-lg mb-1 sm:mb-2 flex items-center justify-center h-[45px] w-[45px] sm:h-[60px] sm:w-[60px] shadow-sm">
       {icon}
     </div>
-    <span className="text-sm text-center">{name}</span>
+    <span className="text-xs sm:text-sm text-center">{name}</span>
   </motion.div>
 );
 
@@ -405,10 +405,10 @@ const AboutComponent = () => {
                     transition={{ duration: 0.4 }}
                   >
                     <div className="flex items-center gap-2 mb-2">
-                      <Code2 className="w-5 h-5 text-rose-900 dark:text-rose-300" />
-                      <h3 className="font-semibold text-lg">Frontend</h3>
+                      <Code2 className="w-4 h-4 sm:w-5 sm:h-5 text-rose-900 dark:text-rose-300" />
+                      <h3 className="font-semibold text-base sm:text-lg">Frontend</h3>
                     </div>
-                    <div className="grid grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-4">
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-9 gap-2 sm:gap-4">
                       {techStack.frontend.map((tech, index) => (
                         <TechIcon 
                           key={index} 
@@ -425,10 +425,10 @@ const AboutComponent = () => {
                     transition={{ delay: 0.2, duration: 0.4 }}
                   >
                     <div className="flex items-center gap-2 mb-2">
-                      <Server className="w-5 h-5 text-rose-900 dark:text-rose-300" />
-                      <h3 className="font-semibold text-lg">Backend</h3>
+                      <Server className="w-4 h-4 sm:w-5 sm:h-5 text-rose-900 dark:text-rose-300" />
+                      <h3 className="font-semibold text-base sm:text-lg">Backend</h3>
                     </div>
-                    <div className="grid grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-4">
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-9 gap-2 sm:gap-4">
                       {techStack.backend.map((tech, index) => (
                         <TechIcon 
                           key={index} 
@@ -445,10 +445,10 @@ const AboutComponent = () => {
                     transition={{ delay: 0.3, duration: 0.4 }}
                   >
                     <div className="flex items-center gap-2 mb-2">
-                      <BrainCircuit className="w-5 h-5 text-rose-900 dark:text-rose-300" />
-                      <h3 className="font-semibold text-lg">Data Science</h3>
+                      <BrainCircuit className="w-4 h-4 sm:w-5 sm:h-5 text-rose-900 dark:text-rose-300" />
+                      <h3 className="font-semibold text-base sm:text-lg">Data Science</h3>
                     </div>
-                    <div className="grid grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-4">
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-9 gap-2 sm:gap-4">
                       {techStack.dataScience.map((tech, index) => (
                         <TechIcon 
                           key={index} 
@@ -465,10 +465,10 @@ const AboutComponent = () => {
                     transition={{ delay: 0.4, duration: 0.4 }}
                   >
                     <div className="flex items-center gap-2 mb-2">
-                      <Wrench className="w-5 h-5 text-rose-900 dark:text-rose-300" />
-                      <h3 className="font-semibold text-lg">Tools</h3>
+                      <Wrench className="w-4 h-4 sm:w-5 sm:h-5 text-rose-900 dark:text-rose-300" />
+                      <h3 className="font-semibold text-base sm:text-lg">Tools</h3>
                     </div>
-                    <div className="grid grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 gap-4">
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-9 gap-2 sm:gap-4">
                       {techStack.tools.map((tech, index) => (
                         <TechIcon 
                           key={index} 
