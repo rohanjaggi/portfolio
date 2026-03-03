@@ -1,18 +1,14 @@
 "use client"
 
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
-import {
-  Card,
-  CardContent
-} from "@/components/ui/card"
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui/tabs"
+} from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -24,468 +20,300 @@ import {
 } from "@/components/ui/dialog";
 import { Code2, Server, BrainCircuit, Wrench } from "lucide-react";
 
-import { 
-  SiReact, 
-  SiNextdotjs, 
-  SiVuedotjs, 
-  SiTypescript,
-  SiTailwindcss,
-  SiHtml5,
-  SiNodedotjs,
-  SiPython,
-  SiOpenjdk,
-  SiMysql,
-  SiSupabase,
-  SiFastapi,
-  SiFlask,
-  SiJupyter,
-  SiPandas,
-  SiNumpy,
-  SiPlotly,
-  SiTensorflow,
-  SiOpenai,
-  SiGit,
-  SiDocker,
-} from '@icons-pack/react-simple-icons';
+import {
+  SiReact, SiNextdotjs, SiVuedotjs, SiTypescript, SiTailwindcss, SiHtml5,
+  SiNodedotjs, SiPython, SiOpenjdk, SiMysql, SiSupabase, SiFastapi, SiFlask,
+  SiJupyter, SiPandas, SiNumpy, SiPlotly, SiTensorflow, SiOpenai, SiGit, SiDocker,
+} from "@icons-pack/react-simple-icons";
 
-const CCAItem = ({ 
-  logo, 
-  role, 
-  organization 
-}: { 
-  logo: string;
-  role: string;
-  organization: string;
-}) => (
-  <motion.div 
-    whileHover={{ x: 5 }}
-    className="flex items-center space-x-3 p-1.5 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+const TechIcon = ({ name, icon }: { name: string; icon: React.ReactNode }) => (
+  <motion.div
+    whileHover={{ y: -4, scale: 1.08 }}
+    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+    className="flex flex-col items-center gap-2"
   >
-    <div className="flex-shrink-0">
-      <Image
-        src={`/logos/${logo}`}
-        alt={`${organization} logo`}
-        width={40}
-        height={40}
-        className="rounded-lg"
-      />
+    <div className="bg-white dark:bg-stone-800 p-2.5 sm:p-3 rounded-xl flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 shadow-sm border border-stone-100 dark:border-stone-700 hover:border-stone-200 dark:hover:border-stone-600 transition-colors">
+      {icon}
     </div>
-    <div className="flex-1">
-      <h3 className="font-semibold text-base text-gray-900 dark:text-gray-100 leading-tight">
-        {role}
-      </h3>
-      <p className="text-sm text-gray-600 dark:text-gray-400">
-        {organization}
-      </p>
-    </div>
+    <span className="text-[10px] sm:text-xs text-center text-stone-400 dark:text-stone-500 font-sans leading-tight">
+      {name}
+    </span>
   </motion.div>
 );
 
-const EducationItem = ({ 
-  logo, 
-  school, 
-  degree,
-  details 
-}: { 
-  logo: string;
-  school: string;
-  degree: string;
-  details: string[];
-}) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-  
-  return (
-    <motion.div 
-      ref={ref}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.5 }}
-      className="flex flex-col items-center text-center"
-    >
-      <motion.div 
-        initial={{ scale: 0 }}
-        animate={isInView ? { scale: 1 } : { scale: 0 }}
-        transition={{ delay: 0.2, type: "spring", stiffness: 200, damping: 15 }}
-        className="mb-2"
-      >
-        <Image
-          src={`/logos/${logo}`}
-          alt={`${school} logo`}
-          width={50}
-          height={50}
-          className="rounded-lg"
-        />
-      </motion.div>
-      <motion.h3 
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
-        className="font-bold text-xl text-gray-800 dark:text-gray-200 mb-2"
-      >
-        {school}
-      </motion.h3>
-      <motion.p 
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-        className="text-base text-gray-600 dark:text-gray-400 mb-3"
-      >
-        {degree}
-      </motion.p>
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-        className="w-full max-w-sm bg-gray-50 dark:bg-gray-800 rounded-lg p-4"
-      >
-        <ul className="list-disc pl-6 space-y-2 text-left text-sm text-gray-600 dark:text-gray-400">
-          {details.map((detail, index) => (
-            <motion.li 
-              key={index}
-              initial={{ opacity: 0, x: -10 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-              transition={{ delay: 0.6 + index * 0.1, duration: 0.3 }}
-            >
-              {detail}
-            </motion.li>
-          ))}
-        </ul>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-const TechIcon = ({ name, icon }: { name: string, icon: React.ReactNode }) => (
+const TechSection = ({
+  icon, label, items, delay,
+}: {
+  icon: React.ReactNode; label: string;
+  items: { name: string; icon: React.ReactNode }[];
+  delay: number;
+}) => (
   <motion.div
-    initial={{ scale: 0 }}
-    animate={{ scale: 1 }}
-    transition={{ type: "spring", stiffness: 200 }}
-    className="flex flex-col items-center"
-    whileHover={{ y: -2 }}
+    initial={{ opacity: 0, y: 18 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay, duration: 0.45 }}
   >
-    <div className="bg-gray-50 dark:bg-gray-200 p-2 sm:p-3 rounded-lg mb-1 sm:mb-2 flex items-center justify-center h-[45px] w-[45px] sm:h-[60px] sm:w-[60px] shadow-sm">
-      {icon}
+    <div className="flex items-center gap-2 mb-4">
+      <span className="text-rose-800 dark:text-rose-400">{icon}</span>
+      <h3 className="font-sans font-semibold text-sm text-stone-700 dark:text-stone-300 tracking-wide">
+        {label}
+      </h3>
     </div>
-    <span className="text-xs sm:text-sm text-center">{name}</span>
+    <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 lg:grid-cols-9 gap-3 sm:gap-4">
+      {items.map((t) => <TechIcon key={t.name} name={t.name} icon={t.icon} />)}
+    </div>
   </motion.div>
 );
 
 const AboutComponent = () => {
-  const [open, setOpen] = useState(false);
-  
-  const headerRef = useRef(null);
-  const imageRef = useRef(null);
-  const tabsRef = useRef(null);
-  const buttonRef = useRef(null);
-  
-  const headerInView = useInView(headerRef, { once: true, amount: 0.5 });
-  const imageInView = useInView(imageRef, { once: true, amount: 0.3 });
-  const tabsInView = useInView(tabsRef, { once: true, amount: 0.3 });
-  const buttonInView = useInView(buttonRef, { once: true, amount: 0.5 });
-  
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.12 });
+
+  // Subtle parallax on the photo as the section scrolls
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
   const ccas = [
-    {
-      logo: "gdsc.png",
-      role: "Product Associate",
-      organization: "Google Developer Student Club"
-    },
-    {
-      logo: "nav.jpg",
-      role: "Innovations and Insights Associate",
-      organization: "NUS Alumni Ventures"
-    },
-    {
-      logo: "nus_fintech.jpeg",
-      role: "Machine Learning Analyst",
-      organization: "NUS Fintech Society"
-    },
-    {
-      logo: "nus_invest.jpeg",
-      role: "Human Resource Executive",
-      organization: "NUS Investment Society"
-    }
+    { logo: "gdsc.png", role: "Product Associate", organization: "Google Developer Student Club" },
+    { logo: "nav.jpg", role: "Innovations and Insights Associate", organization: "NUS Alumni Ventures" },
+    { logo: "nus_fintech.jpeg", role: "Machine Learning Analyst", organization: "NUS Fintech Society" },
+    { logo: "nus_invest.jpeg", role: "Human Resource Executive", organization: "NUS Investment Society" },
   ];
 
   const education = [{
     logo: "nus.png",
     school: "National University of Singapore",
     degree: "BSc. Business Analytics (Honours)",
-    details: [
-      "Specialisation in Machine Learning",
-      "Second Major in Economics",
-      "Aug 2023 - May 2027"
-    ]
+    details: ["Specialisation in Machine Learning", "Second Major in Economics", "Aug 2023 – May 2027"],
   }];
 
   const techStack = {
     frontend: [
-      { name: "React", icon: <SiReact size={30} color="#61DAFB" /> },
-      { name: "Next.js", icon: <SiNextdotjs size={30} color="#000000" /> },
-      { name: "Vue.js", icon: <SiVuedotjs size={30} color="#4FC08D" /> },
-      { name: "TypeScript", icon: <SiTypescript size={30} color="#3178C6" /> },
-      { name: "Tailwind CSS", icon: <SiTailwindcss size={30} color="#06B6D4" /> },
-      { name: "HTML/CSS", icon: <SiHtml5 size={30} color="#E34F26" /> }
+      { name: "React", icon: <SiReact size={26} color="#61DAFB" /> },
+      { name: "Next.js", icon: <SiNextdotjs size={26} color="#000000" /> },
+      { name: "Vue.js", icon: <SiVuedotjs size={26} color="#4FC08D" /> },
+      { name: "TypeScript", icon: <SiTypescript size={26} color="#3178C6" /> },
+      { name: "Tailwind", icon: <SiTailwindcss size={26} color="#06B6D4" /> },
+      { name: "HTML/CSS", icon: <SiHtml5 size={26} color="#E34F26" /> },
     ],
     backend: [
-      { name: "Node.js", icon: <SiNodedotjs size={30} color="#339933" /> },
-      { name: "Python", icon: <SiPython size={30} color="#3776AB" /> },
-      { name: "Java", icon: <SiOpenjdk size={30} color="#007396" /> },
-      { name: "MySQL", icon: <SiMysql size={30} color="#4479A1" /> },
-      { name: "Supabase", icon: <SiSupabase size={30} color="#3ECF8E" /> },
-      { name: "FastAPI", icon: <SiFastapi size={30} color="#009688" /> },
-      { name: "Flask", icon: <SiFlask size={30} color="#000000" /> }
+      { name: "Node.js", icon: <SiNodedotjs size={26} color="#339933" /> },
+      { name: "Python", icon: <SiPython size={26} color="#3776AB" /> },
+      { name: "Java", icon: <SiOpenjdk size={26} color="#007396" /> },
+      { name: "MySQL", icon: <SiMysql size={26} color="#4479A1" /> },
+      { name: "Supabase", icon: <SiSupabase size={26} color="#3ECF8E" /> },
+      { name: "FastAPI", icon: <SiFastapi size={26} color="#009688" /> },
+      { name: "Flask", icon: <SiFlask size={26} color="#000000" /> },
     ],
     dataScience: [
-      { name: "Jupyter", icon: <SiJupyter size={30} color="#F37626" /> },
-      { name: "Pandas", icon: <SiPandas size={30} color="#150458" /> },
-      { name: "NumPy", icon: <SiNumpy size={30} color="#013243" /> },
-      { name: "Matplotlib", icon: <SiPlotly size={30} color="#3F4F75" /> },
-      { name: "TensorFlow", icon: <SiTensorflow size={30} color="#FF6F00" /> },
-      { name: "OpenAI API", icon: <SiOpenai size={30} color="#412991" /> }
+      { name: "Jupyter", icon: <SiJupyter size={26} color="#F37626" /> },
+      { name: "Pandas", icon: <SiPandas size={26} color="#150458" /> },
+      { name: "NumPy", icon: <SiNumpy size={26} color="#013243" /> },
+      { name: "Matplotlib", icon: <SiPlotly size={26} color="#3F4F75" /> },
+      { name: "TensorFlow", icon: <SiTensorflow size={26} color="#FF6F00" /> },
+      { name: "OpenAI API", icon: <SiOpenai size={26} color="#412991" /> },
     ],
     tools: [
-      { name: "Git", icon: <SiGit size={30} color="#F05032" /> },
-      { name: "Docker", icon: <SiDocker size={30} color="#2496ED" /> },
-      { 
-      name: "VS Code", 
-      icon: (
-        <div className="flex items-center justify-center w-full h-full">
-          <Image
-            src="/logos/vscode.svg"
-            alt="VS Code logo"
-            width={30}
-            height={30}
-          />
-        </div>
-      ) 
-    },
-    { 
-      name: "Microsoft Azure", 
-      icon: (
-        <div className="flex items-center justify-center w-full h-full">
-          <Image
-            src="/logos/azure.png"
-            alt="Microsoft Azure logo"
-            width={30}
-            height={30}
-          />
-        </div>
-      ) 
-    }
-    ]
+      { name: "Git", icon: <SiGit size={26} color="#F05032" /> },
+      { name: "Docker", icon: <SiDocker size={26} color="#2496ED" /> },
+      { name: "VS Code", icon: <Image src="/logos/vscode.svg" alt="VS Code" width={26} height={26} /> },
+      { name: "Azure", icon: <Image src="/logos/azure.png" alt="Azure" width={26} height={26} /> },
+    ],
   };
 
   return (
-    <div id="about" className="py-12 px-4 sm:px-6 md:px-8">
-      <motion.div 
-        ref={headerRef}
-        initial={{ opacity: 0, y: -20 }}
-        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-        transition={{ duration: 0.5 }}
-        className="flex flex-col items-center mb-10"
-      >
-        <h2 className="text-3xl font-bold text-center mb-3 text-gray-900 dark:text-white">
-          About Me
-        </h2>
-        <motion.div 
-          initial={{ scaleX: 0 }}
-          animate={headerInView ? { scaleX: 1 } : { scaleX: 0 }}
-          transition={{ delay: 0.3, duration: 0.4 }}
-          className="w-20 h-1 bg-rose-900 dark:bg-rose-300 rounded mb-8 origin-left"
-        ></motion.div>
-      </motion.div>
+    <section
+      id="about"
+      ref={sectionRef}
+      className="px-6 sm:px-12 lg:px-20 xl:px-32 py-24 lg:py-32"
+    >
+      <div className="max-w-7xl mx-auto">
 
-      <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto">
-        <motion.div 
-          ref={imageRef}
-          initial={{ opacity: 0, x: -50 }}
-          animate={imageInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-          transition={{ duration: 0.6, type: "spring", stiffness: 100, damping: 15 }}
-          className="flex-shrink-0 mb-8 md:mb-0"
-        >
-          <Image
-            src="/about-pic.png"
-            alt="About Me Picture"
-            width={400}
-            height={400}
-            className="rounded-lg shadow-lg max-w-full h-auto"
-          />
-        </motion.div>
+        {/* Section header */}
+        <div className="mb-16">
+          <motion.p
+            initial={{ opacity: 0, x: -14 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.55 }}
+            className="font-sans text-rose-800 dark:text-rose-400 text-xs tracking-[0.28em] uppercase mb-3"
+          >
+            01 /
+          </motion.p>
+          <motion.h2
+            initial={{ clipPath: "inset(100% 0 0 0)" }}
+            animate={inView ? { clipPath: "inset(0% 0 -30% 0)" } : { clipPath: "inset(100% 0 0 0)" }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="font-serif font-bold text-stone-900 dark:text-stone-50"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
+          >
+            About Me
+          </motion.h2>
+        </div>
 
-        <motion.div 
-          ref={tabsRef}
-          initial={{ opacity: 0, x: 50 }}
-          animate={tabsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-          transition={{ duration: 0.6, delay: 0.2, type: "spring", stiffness: 100, damping: 15 }}
-          className="flex-1 w-full md:max-w-lg space-y-6"
-        >
-          <Tabs defaultValue="education" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="education">Education</TabsTrigger>
-              <TabsTrigger value="ccas">Co-Curriculars</TabsTrigger>
-            </TabsList>
-            <TabsContent value="education" className="mt-3">
-              <Card>
-                <CardContent className="p-3 min-h-[280px] flex items-center justify-center">
-                  <div className="w-full">
-                    {education.map((edu, index) => (
-                      <EducationItem
-                        key={index}
-                        logo={edu.logo}
-                        school={edu.school}
-                        degree={edu.degree}
-                        details={edu.details}
-                      />
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            <TabsContent value="ccas" className="mt-3">
-              <Card>
-                <CardContent className="p-6 min-h-[280px]">
-                  <div className="space-y-2">
-                    {ccas.map((cca, index) => (
+        <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-12 lg:gap-20 items-start">
+
+          {/* Photo with parallax */}
+          <motion.div
+            ref={imageRef}
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            style={{ y: imageY }}
+            className="flex justify-center lg:justify-start"
+          >
+            <div className="relative">
+              <div className="absolute inset-0 rounded-2xl border-2 border-stone-200 dark:border-stone-700/60 translate-x-3 translate-y-3 -z-10" />
+              <div className="relative rounded-2xl overflow-hidden shadow-md"
+                style={{ width: "clamp(260px, 28vw, 340px)" }}>
+                <Image
+                  src="/about-pic.png"
+                  alt="Rohan Jaggi"
+                  width={340}
+                  height={420}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Info panel */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.75, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-6"
+          >
+            <Tabs defaultValue="education" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 mb-1 bg-stone-100 dark:bg-stone-800/50 rounded-xl p-1">
+                <TabsTrigger
+                  value="education"
+                  className="rounded-xl font-sans text-sm data-[state=active]:bg-white dark:data-[state=active]:bg-stone-700 data-[state=active]:shadow-sm transition-all"
+                >
+                  Education
+                </TabsTrigger>
+                <TabsTrigger
+                  value="ccas"
+                  className="rounded-xl font-sans text-sm data-[state=active]:bg-white dark:data-[state=active]:bg-stone-700 data-[state=active]:shadow-sm transition-all"
+                >
+                  Co-Curriculars
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="education">
+                <div className="border border-stone-100 dark:border-stone-800 rounded-2xl p-7 bg-white dark:bg-stone-900/30 min-h-[270px] flex items-center">
+                  {education.map((edu) => (
+                    <div key={edu.school} className="flex flex-col items-center text-center w-full gap-5">
                       <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 * index, duration: 0.4 }}
+                        initial={{ scale: 0, rotate: -8 }}
+                        animate={inView ? { scale: 1, rotate: 0 } : {}}
+                        transition={{ delay: 0.5, type: "spring", stiffness: 180, damping: 14 }}
                       >
-                        <CCAItem
-                          logo={cca.logo}
-                          role={cca.role}
-                          organization={cca.organization}
+                        <Image
+                          src={`/logos/${edu.logo}`}
+                          alt={edu.school}
+                          width={60}
+                          height={60}
+                          className="rounded-xl shadow-sm"
                         />
+                      </motion.div>
+                      <div>
+                        <h3 className="font-serif font-bold text-xl text-stone-900 dark:text-stone-100 mb-1.5">
+                          {edu.school}
+                        </h3>
+                        <p className="font-sans text-stone-500 dark:text-stone-400 text-sm mb-5">
+                          {edu.degree}
+                        </p>
+                        <div className="flex flex-col gap-2">
+                          {edu.details.map((d, i) => (
+                            <motion.div
+                              key={d}
+                              initial={{ opacity: 0, y: 8 }}
+                              animate={inView ? { opacity: 1, y: 0 } : {}}
+                              transition={{ delay: 0.6 + i * 0.1 }}
+                              className="flex items-center justify-center gap-2 font-sans text-sm text-stone-600 dark:text-stone-400"
+                            >
+                              <span className="w-1.5 h-1.5 rounded-full bg-rose-800/60 dark:bg-rose-400/60 flex-shrink-0" />
+                              {d}
+                            </motion.div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="ccas">
+                <div className="border border-stone-100 dark:border-stone-800 rounded-2xl p-6 bg-white dark:bg-stone-900/30 min-h-[270px]">
+                  <div className="space-y-1">
+                    {ccas.map((cca, i) => (
+                      <motion.div
+                        key={cca.organization}
+                        initial={{ opacity: 0, x: -12 }}
+                        animate={inView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ delay: 0.38 + i * 0.09 }}
+                        whileHover={{ x: 5 }}
+                        className="flex items-center gap-4 p-3 rounded-xl hover:bg-stone-50 dark:hover:bg-stone-800/50 transition-colors cursor-default"
+                      >
+                        <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 border border-stone-100 dark:border-stone-700">
+                          <Image
+                            src={`/logos/${cca.logo}`}
+                            alt={cca.organization}
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div>
+                          <p className="font-sans font-semibold text-sm text-stone-900 dark:text-stone-100 leading-snug">
+                            {cca.role}
+                          </p>
+                          <p className="font-sans text-xs text-stone-500 dark:text-stone-400 mt-0.5">
+                            {cca.organization}
+                          </p>
+                        </div>
                       </motion.div>
                     ))}
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
+                </div>
+              </TabsContent>
+            </Tabs>
 
-          <motion.div 
-            ref={buttonRef}
-            initial={{ opacity: 0, y: 20 }}
-            animate={buttonInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="flex justify-center mt-4"
-          >
-            <Dialog open={open} onOpenChange={setOpen}>
+            <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
               <DialogTrigger asChild>
                 <Button
                   variant="outline"
-                  className="rounded-lg font-medium px-6 py-2 
-                  bg-black text-white 
-                  hover:bg-gray-800 hover:text-gray-200 
-                  dark:bg-white dark:text-black 
-                  dark:hover:bg-gray-200 dark:hover:text-gray-800 
-                    transition-colors"
+                  className="w-full rounded-xl font-sans font-medium py-5 text-sm border-stone-200 dark:border-stone-700 hover:border-rose-800 dark:hover:border-rose-400 hover:text-rose-800 dark:hover:text-rose-400 transition-all duration-200"
                 >
                   View My Tech Stack
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-[85vw] sm:max-w-5xl max-h-[95vh] overflow-y-auto px-10 pt-8">
-                <DialogHeader className="sticky top-0 backdrop-blur-md bg-white/90 dark:bg-gray-950/90 pb-2 z-10 pt-0">
-                  <DialogTitle className="text-2xl font-bold text-center mb-1">
-                    Tech Stack
-                  </DialogTitle>
-                  <DialogDescription className="text-center text-sm text-gray-600 dark:text-gray-400 mb-1">
+              <DialogContent className="max-w-[90vw] sm:max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl">
+                <DialogHeader className="sticky top-0 backdrop-blur-md bg-white/90 dark:bg-stone-950/90 pb-4 z-[5] pt-2">
+                  <DialogTitle className="font-serif text-2xl font-bold text-center">Tech Stack</DialogTitle>
+                  <DialogDescription className="font-sans text-center text-stone-500 text-sm">
                     Technologies I work with
                   </DialogDescription>
-                  <div className="w-16 h-1 bg-rose-900 dark:bg-rose-300 rounded mx-auto mb-2"></div>
+                  <div className="w-10 h-[2px] bg-rose-800 dark:bg-rose-400 rounded mx-auto mt-2" />
                 </DialogHeader>
-
-                <div className="grid gap-6 py-0">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <Code2 className="w-4 h-4 sm:w-5 sm:h-5 text-rose-900 dark:text-rose-300" />
-                      <h3 className="font-semibold text-base sm:text-lg">Frontend</h3>
-                    </div>
-                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-9 gap-2 sm:gap-4">
-                      {techStack.frontend.map((tech, index) => (
-                        <TechIcon 
-                          key={index} 
-                          name={tech.name} 
-                          icon={tech.icon} 
-                        />
-                      ))}
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.4 }}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <Server className="w-4 h-4 sm:w-5 sm:h-5 text-rose-900 dark:text-rose-300" />
-                      <h3 className="font-semibold text-base sm:text-lg">Backend</h3>
-                    </div>
-                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-9 gap-2 sm:gap-4">
-                      {techStack.backend.map((tech, index) => (
-                        <TechIcon 
-                          key={index} 
-                          name={tech.name} 
-                          icon={tech.icon} 
-                        />
-                      ))}
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.4 }}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <BrainCircuit className="w-4 h-4 sm:w-5 sm:h-5 text-rose-900 dark:text-rose-300" />
-                      <h3 className="font-semibold text-base sm:text-lg">Data Science</h3>
-                    </div>
-                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-9 gap-2 sm:gap-4">
-                      {techStack.dataScience.map((tech, index) => (
-                        <TechIcon 
-                          key={index} 
-                          name={tech.name} 
-                          icon={tech.icon} 
-                        />
-                      ))}
-                    </div>
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.4 }}
-                  >
-                    <div className="flex items-center gap-2 mb-2">
-                      <Wrench className="w-4 h-4 sm:w-5 sm:h-5 text-rose-900 dark:text-rose-300" />
-                      <h3 className="font-semibold text-base sm:text-lg">Tools</h3>
-                    </div>
-                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-8 xl:grid-cols-9 gap-2 sm:gap-4">
-                      {techStack.tools.map((tech, index) => (
-                        <TechIcon 
-                          key={index} 
-                          name={tech.name} 
-                          icon={tech.icon} 
-                        />
-                      ))}
-                    </div>
-                  </motion.div>
+                <div className="grid gap-8 pb-2">
+                  <TechSection icon={<Code2 size={15} />} label="Frontend" items={techStack.frontend} delay={0} />
+                  <TechSection icon={<Server size={15} />} label="Backend" items={techStack.backend} delay={0.08} />
+                  <TechSection icon={<BrainCircuit size={15} />} label="Data Science" items={techStack.dataScience} delay={0.16} />
+                  <TechSection icon={<Wrench size={15} />} label="Tools" items={techStack.tools} delay={0.24} />
                 </div>
               </DialogContent>
             </Dialog>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default AboutComponent;

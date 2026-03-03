@@ -2,236 +2,196 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ArrowDownIcon, Github, Linkedin, Twitter } from "lucide-react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { Github, Linkedin, ArrowDown } from "lucide-react";
+
+const roles = ["ML Engineer", "Data Scientist"];
 
 const HomeComponent = () => {
-  const [occupation, setOccupation] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const occupations = ["ML Engineer", "Data Scientist"];
-  const [delta, setDelta] = useState(150);
-  const [isPaused, setIsPaused] = useState(false);
-  const pauseDuration = 2000; 
-  
+  const [roleIndex, setRoleIndex] = useState(0);
+  const { scrollY } = useScroll();
+
+  // Parallax: photo drifts up as user scrolls
+  const photoY = useTransform(scrollY, [0, 700], [0, -80]);
+  const photoScale = useTransform(scrollY, [0, 700], [1, 1.04]);
+  const textY = useTransform(scrollY, [0, 500], [0, -30]);
+
   useEffect(() => {
-    if (isPaused) return;
-    
-    let ticker = setTimeout(() => {
-      tick();
-    }, delta);
-
-    return () => { clearTimeout(ticker) };
-  }, [occupation, isDeleting, isPaused]);
-  
-  const tick = () => {
-    let i = loopNum % occupations.length;
-    let fullText = occupations[i];
-    
-    if (isPaused) {
-      return;
-    }
-    
-    let updatedText = isDeleting 
-      ? fullText.substring(0, occupation.length - 1) 
-      : fullText.substring(0, occupation.length + 1);
-
-    setOccupation(updatedText);
-
-    if (isDeleting) {
-      setDelta(prevDelta => prevDelta / 1.2);
-    }
-
-    if (!isDeleting && updatedText === fullText) {
-      setIsPaused(true);
-      
-      setTimeout(() => {
-        setIsPaused(false);
-        setIsDeleting(true);
-        setDelta(200);
-      }, pauseDuration);
-      
-    } else if (isDeleting && updatedText === '') {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      setDelta(150);
-    }
-  };
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div id="home" className="flex flex-col justify-center items-center min-h-screen">
-      <div className="flex flex-col items-center space-y-8 mb-16">
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ 
-            type: "spring", 
-            stiffness: 260, 
-            damping: 20, 
-            delay: 0.2 
-          }}
-          whileHover={{ scale: 1.05 }}
-          className="relative"
-        >
-          <motion.div 
-            className="absolute inset-[-20px] rounded-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.2, delay: 0.5 }}
-          >
-            <svg className="w-full h-full" viewBox="0 0 340 340">
-              <motion.circle 
-                cx="170" 
-                cy="170" 
-                r="160" 
-                fill="none" 
-                stroke="rgba(100, 100, 100, 0.15)" 
-                strokeWidth="1"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1.5, delay: 0.7, ease: "easeInOut" }}
-                className="dark:stroke-gray-400/15"
-              />
-              <motion.circle 
-                cx="170" 
-                cy="170" 
-                r="155" 
-                fill="none" 
-                stroke="rgba(120, 120, 120, 0.2)" 
-                strokeWidth="0.5"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1.8, delay: 0.8, ease: "easeInOut" }}
-                className="dark:stroke-gray-400/20"
-              />
-            </svg>
-          </motion.div>
+    <section
+      id="home"
+      className="relative min-h-screen flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:px-32 pt-16"
+    >
+      <div className="max-w-7xl mx-auto w-full py-16 lg:py-0 flex-1 flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-10 lg:gap-20 items-center w-full">
 
-          <motion.div 
-            className="absolute inset-0 overflow-hidden rounded-full bg-gradient-to-tr from-transparent via-white/5 to-transparent z-20 pointer-events-none"
-            initial={{ backgroundPosition: "0% 0%" }}
-            animate={{ backgroundPosition: "100% 100%" }}
-            transition={{ 
-              duration: 5, 
-              ease: "easeInOut",
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-          />
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="rounded-full overflow-hidden border-[3px] border-gray-100 dark:border-gray-800 shadow-lg"
-          >
-            <Image 
-              src="/profile-pic.png" 
-              alt="Profile Picture" 
-              width={300} 
-              height={300} 
-              className="rounded-full relative z-10 grayscale-[15%] hover:grayscale-0 transition-all duration-500"
-            />
-          </motion.div>
-        </motion.div>
-
-        <div className="text-center space-y-4">
-          <motion.h2 
-            className="text-2xl text-gray-600 dark:text-gray-400"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-          >
-            Hello, I'm
-          </motion.h2>
-          
-          <motion.h1 
-            className="text-5xl font-bold text-gray-900 dark:text-white"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0 }}
-          >
-            Rohan Jaggi
-          </motion.h1>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
-            className="h-8" 
-          >
-            <span className="text-2xl text-gray-700 dark:text-gray-300">Aspiring </span>
-            <span className="text-2xl font-semibold text-rose-800 dark:text-rose-400 relative">
-              {occupation}
-            </span>
-          </motion.div>
-        </div>
-        
-        <motion.div 
-          className="flex flex-col md:flex-row gap-4 mt-1"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-        >
-          {[
-            { 
-              name: 'LinkedIn', 
-              icon: <Linkedin className="h-5 w-5 transition-transform duration-300" />, 
-              url: 'https://linkedin.com/in/rohan-jaggi',
-              bgColor: "bg-[#0077B5]",
-              textColor: "text-white",
-              hoverColor: "hover:bg-[#006399]"
-            },
-            { 
-              name: 'GitHub', 
-              icon: <Github className="h-5 w-5 transition-transform duration-300" />, 
-              url: 'https://github.com/rohanjaggi',
-              bgColor: "bg-[#24292e]",
-              textColor: "text-white",
-              hoverColor: "hover:bg-[#1a1f24]"
-            }
-          ].map((social, index) => (
-            <motion.a
-              key={social.name}
-              href={social.url}
-              target="_blank" 
-              rel="noopener noreferrer"
-              className={`${social.bgColor} ${social.textColor} ${social.hoverColor} px-5 py-2 rounded-md shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-700/20 flex items-center space-x-2 group`}
-              initial={{ opacity: 0, y: 20 }}
+          {/* Text side — slight upward drift on scroll */}
+          <motion.div style={{ y: textY }}>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                delay: 1.5 + index * 0.1,
-                type: "spring",
-                stiffness: 100,
-                damping: 15 
-              }}
-              whileHover={{ 
-                y: -3,
-                transition: { 
-                  type: "spring", 
-                  stiffness: 400, 
-                  damping: 10 
-                }
-              }}
-              whileTap={{ 
-                scale: 0.97,
-                transition: { 
-                  type: "spring", 
-                  stiffness: 500,
-                  damping: 10 
-                }
-              }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="font-sans text-stone-400 dark:text-stone-500 text-xs tracking-[0.32em] uppercase mb-7"
             >
-              <span className="group-hover:scale-110 inline-block transition-transform duration-300">
-                {social.icon}
+              Hello, I&apos;m
+            </motion.p>
+
+            {/*
+              Use clipPath instead of overflow-hidden so italic descenders
+              (J, g tail in Playfair Display) are never clipped.
+              inset(100% 0 0 0) = fully hidden from top → inset(0 0 -50% 0) = fully visible
+              with -50% bottom giving extra room for descenders below the baseline.
+            */}
+            <motion.h1
+              initial={{ clipPath: "inset(100% 0 0 0)" }}
+              animate={{ clipPath: "inset(0% 0 -50% 0)" }}
+              transition={{ duration: 0.9, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
+              className="font-serif font-bold text-stone-900 dark:text-stone-50 leading-none"
+              style={{ fontSize: "clamp(4rem, 10.5vw, 8.5rem)" }}
+            >
+              Rohan
+            </motion.h1>
+
+            {/* Same technique — -60% bottom inset gives even more room for italic J descender */}
+            <motion.h1
+              initial={{ clipPath: "inset(100% 0 0 0)" }}
+              animate={{ clipPath: "inset(0% 0 -60% 0)" }}
+              transition={{ duration: 0.9, delay: 0.46, ease: [0.16, 1, 0.3, 1] }}
+              className="font-serif font-bold italic text-rose-800 dark:text-rose-400 leading-none"
+              style={{ fontSize: "clamp(4rem, 10.5vw, 8.5rem)" }}
+            >
+              Jaggi
+            </motion.h1>
+
+            {/* Animated divider */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.9, delay: 0.72, ease: [0.16, 1, 0.3, 1] }}
+              className="origin-left h-px w-full max-w-xs bg-gradient-to-r from-stone-300 dark:from-stone-700 to-transparent my-7"
+            />
+
+            {/* Role switcher */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.88 }}
+              className="flex items-center gap-3 mb-9 h-6"
+            >
+              <span className="font-sans text-stone-500 dark:text-stone-400 text-sm">
+                Aspiring
               </span>
-              <span className="font-medium transition-transform duration-300">{social.name}</span>
-            </motion.a>
-          ))}
-        </motion.div>
+              <div className="relative h-full flex items-center min-w-[160px]">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={roleIndex}
+                    initial={{ y: 22, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -22, opacity: 0 }}
+                    transition={{ duration: 0.32, ease: "easeOut" }}
+                    className="font-sans font-bold text-stone-900 dark:text-stone-100 text-sm absolute whitespace-nowrap"
+                  >
+                    {roles[roleIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1.05 }}
+              className="flex flex-wrap gap-3"
+            >
+              <a
+                href="https://linkedin.com/in/rohan-jaggi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#0077B5] text-white rounded-full font-sans font-medium text-sm transition-all duration-300 hover:bg-[#006399] hover:shadow-[0_8px_24px_-4px_rgba(0,119,181,0.4)] hover:-translate-y-0.5"
+              >
+                <Linkedin className="h-4 w-4" />
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com/rohanjaggi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 rounded-full font-sans font-medium text-sm transition-all duration-300 hover:bg-stone-700 dark:hover:bg-white hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.2)] hover:-translate-y-0.5"
+              >
+                <Github className="h-4 w-4" />
+                GitHub
+              </a>
+            </motion.div>
+          </motion.div>
+
+          {/* Photo — parallax drift up on scroll */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            style={{ y: photoY, scale: photoScale }}
+            className="flex justify-center lg:justify-end"
+          >
+            <div className="relative">
+              {/* Offset decorative border */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9, duration: 0.6 }}
+                className="absolute inset-0 rounded-2xl border-2 border-rose-200 dark:border-rose-900/40 translate-x-4 translate-y-4 -z-10"
+              />
+              {/* Second decorative shape */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.1, duration: 0.6 }}
+                className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-rose-50 dark:bg-rose-950/30 -z-20 blur-2xl"
+              />
+              <div
+                className="relative rounded-2xl overflow-hidden"
+                style={{ width: "clamp(220px, 26vw, 310px)", height: "clamp(270px, 32vw, 385px)" }}
+              >
+                <Image
+                  src="/profile-pic.png"
+                  alt="Rohan Jaggi"
+                  fill
+                  className="object-cover object-top"
+                  priority
+                />
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
       </div>
-    </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 0.8 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-default select-none"
+        onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+      >
+        <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-stone-300 dark:text-stone-600">
+          scroll
+        </span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ArrowDown className="h-3.5 w-3.5 text-stone-300 dark:text-stone-600" />
+        </motion.div>
+      </motion.div>
+    </section>
   );
-}
+};
 
 export default HomeComponent;

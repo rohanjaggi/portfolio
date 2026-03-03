@@ -1,22 +1,17 @@
 "use client"
 
-import { motion } from "framer-motion";
-
 const Footer = () => {
   return (
-    <motion.footer
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="w-full max-w-5xl mx-auto px-4 py-6 text-center text-gray-500 dark:text-gray-400 text-sm border-t border-gray-200 dark:border-gray-800 mt-8"
-    >
-      <p className="mb-2">
-        Created by Rohan Jaggi
-      </p>
-      <p>
-        Built with Next.js, Tailwind CSS, and Framer Motion © {new Date().getFullYear()}
-      </p>
-    </motion.footer>
+    <footer className="px-6 sm:px-12 lg:px-20 xl:px-32 py-8 border-t border-stone-100 dark:border-stone-800">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+        <span className="font-serif font-bold text-rose-800 dark:text-rose-400 text-sm">
+          Rohan Jaggi
+        </span>
+        <p className="font-sans text-xs text-stone-400 dark:text-stone-600">
+          Built with Next.js, Tailwind CSS & Framer Motion &copy; {new Date().getFullYear()}
+        </p>
+      </div>
+    </footer>
   );
 };
 
