@@ -5,30 +5,39 @@ import ExperienceComponent from "./components/experience";
 import ProjectsComponent from "./components/projects";
 import ContactComponent from "./components/contact-me";
 
-const marqueeItems = [
-  "ML Engineer",
-  "Data Scientist",
-  "AI Engineer",
-  "Full Stack Developer",
-  "Research Assistant",
-  "Teaching Assistant",
-  "NUS Business Analytics",
-  "Open to Opportunities",
+import {
+  SiPython, SiPytorch, SiTensorflow, SiScikitlearn,
+  SiPandas, SiNumpy, SiJupyter, SiReact, SiDocker, SiPostgresql,
+} from "@icons-pack/react-simple-icons";
+
+const techStack = [
+  { name: "Python",       icon: <SiPython      size={15} color="currentColor" /> },
+  { name: "PyTorch",      icon: <SiPytorch     size={15} color="currentColor" /> },
+  { name: "TensorFlow",   icon: <SiTensorflow  size={15} color="currentColor" /> },
+  { name: "scikit-learn", icon: <SiScikitlearn size={15} color="currentColor" /> },
+  { name: "Pandas",       icon: <SiPandas      size={15} color="currentColor" /> },
+  { name: "NumPy",        icon: <SiNumpy       size={15} color="currentColor" /> },
+  { name: "Jupyter",      icon: <SiJupyter     size={15} color="currentColor" /> },
+  { name: "React",        icon: <SiReact       size={15} color="currentColor" /> },
+  { name: "Docker",       icon: <SiDocker      size={15} color="currentColor" /> },
+  { name: "PostgreSQL",   icon: <SiPostgresql  size={15} color="currentColor" /> },
 ];
 
-// Doubled for seamless CSS marquee loop
-const MarqueeStrip = () => (
+const TechMarquee = () => (
   <div className="border-y border-stone-100 dark:border-stone-800/50 py-3.5 overflow-hidden bg-stone-50/50 dark:bg-stone-900/20">
     <div className="flex animate-marquee whitespace-nowrap">
       {[0, 1].map((copy) => (
         <span
           key={copy}
-          className="font-sans text-[10px] tracking-[0.28em] uppercase text-stone-400 dark:text-stone-600 flex-shrink-0"
+          className="flex items-center flex-shrink-0 text-stone-400 dark:text-stone-600"
         >
-          {marqueeItems.map((item, j) => (
-            <span key={j}>
-              {item}
-              <span className="mx-7 text-rose-700/40 dark:text-rose-400/30">·</span>
+          {techStack.map((tech, j) => (
+            <span key={j} className="inline-flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 font-sans text-[10px] tracking-[0.22em] uppercase">
+                {tech.icon}
+                {tech.name}
+              </span>
+              <span className="mx-6 text-rose-700/40 dark:text-rose-400/30">·</span>
             </span>
           ))}
         </span>
@@ -43,8 +52,8 @@ export default function Home() {
       <Navbar />
       <main>
         <HomeComponent />
-        <MarqueeStrip />
         <AboutComponent />
+        <TechMarquee />
         <ExperienceComponent />
         <ProjectsComponent />
         <ContactComponent />

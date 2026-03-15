@@ -11,6 +11,7 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -57,13 +58,13 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 xl:px-32 h-16 flex items-center justify-between">
+      <nav className="px-6 sm:px-12 lg:px-20 xl:px-32 h-16 flex items-center justify-between">
         {/* Logo */}
         <button
           onClick={() => scrollToSection("home")}
           className="font-serif font-bold text-xl text-rose-800 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 transition-colors"
         >
-          RJ
+          Rohan Jaggi
         </button>
 
         {/* Desktop nav */}
@@ -179,6 +180,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
     </motion.header>
   );
 };

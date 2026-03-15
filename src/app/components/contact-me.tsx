@@ -1,19 +1,12 @@
 "use client"
 
 import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Mail, Linkedin, ArrowUpRight } from "lucide-react";
 
 const ContactComponent = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, amount: 0.15 });
-
-  // Parallax on the large heading
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const headingY = useTransform(scrollYProgress, [0, 1], [30, -30]);
 
   const contactMethods = [
     {
@@ -41,48 +34,48 @@ const ContactComponent = () => {
 
       <div className="max-w-7xl mx-auto">
 
-        {/* Section label */}
+        {/* Section header — centred */}
+        <div className="mb-16 relative text-center">
+          <span
+            className="absolute -top-6 left-1/2 -translate-x-1/2 font-serif font-bold text-stone-100 dark:text-stone-800/70 select-none pointer-events-none leading-none"
+            style={{ fontSize: "clamp(6rem, 14vw, 11rem)", zIndex: 0 }}
+            aria-hidden
+          >
+            04
+          </span>
+          <div className="relative" style={{ zIndex: 1 }}>
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55 }}
+              className="font-sans text-rose-800 dark:text-rose-400 text-xs tracking-[0.28em] uppercase mb-3"
+            >
+              Say Hello
+            </motion.p>
+            <motion.h2
+              initial={{ clipPath: "inset(100% 0 0 0)" }}
+              animate={inView ? { clipPath: "inset(0% 0 -30% 0)" } : { clipPath: "inset(100% 0 0 0)" }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              className="font-serif font-bold text-stone-900 dark:text-stone-50"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
+            >
+              Get In Touch
+            </motion.h2>
+          </div>
+        </div>
+
+        {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, x: -14 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.55 }}
-          className="font-sans text-rose-800 dark:text-rose-400 text-xs tracking-[0.28em] uppercase mb-6"
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="font-sans text-stone-500 dark:text-stone-400 text-base mb-10 text-center leading-relaxed"
         >
-          04 /
+          Whether it&apos;s a project, opportunity, or just a conversation — I&apos;d love to hear from you.
         </motion.p>
 
-        {/* Large headline with parallax */}
-        <motion.div style={{ y: headingY }} className="mb-16 lg:mb-24">
-          <motion.h2
-            initial={{ clipPath: "inset(100% 0 0 0)" }}
-            animate={inView ? { clipPath: "inset(0% 0 -50% 0)" } : { clipPath: "inset(100% 0 0 0)" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif font-bold text-stone-900 dark:text-stone-50 leading-none"
-            style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
-          >
-            Let&apos;s
-          </motion.h2>
-          <motion.h2
-            initial={{ clipPath: "inset(100% 0 0 0)" }}
-            animate={inView ? { clipPath: "inset(0% 0 -60% 0)" } : { clipPath: "inset(100% 0 0 0)" }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif font-bold italic text-rose-800 dark:text-rose-400 leading-none"
-            style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
-          >
-            connect.
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="font-sans text-stone-500 dark:text-stone-400 text-base mt-6 max-w-md leading-relaxed"
-          >
-            Whether it&apos;s a project, opportunity, or just a conversation — I&apos;d love to hear from you.
-          </motion.p>
-        </motion.div>
-
         {/* Contact cards */}
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           {contactMethods.map((method, i) => (
             <motion.a
               key={method.label}
