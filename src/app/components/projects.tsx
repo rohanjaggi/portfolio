@@ -7,6 +7,7 @@ import Image from "next/image";
 
 interface Project {
   title: string;
+  year: string;
   description: string;
   image: string;
   tags: string[];
@@ -85,14 +86,35 @@ const ProjectCard = ({ project, index, inView }: { project: Project; index: numb
 
       {/* Content */}
       <div className="p-4 sm:p-5 flex flex-col flex-grow">
-        <h3 className="font-serif font-bold text-base text-stone-900 dark:text-stone-50 mb-1.5 group-hover:text-rose-800 dark:group-hover:text-rose-400 transition-colors duration-300 leading-snug">
-          {project.title}
-        </h3>
+        <div className="flex items-baseline justify-between mb-1.5">
+          <h3 className="font-serif font-bold text-base text-stone-900 dark:text-stone-50 group-hover:text-rose-800 dark:group-hover:text-rose-400 transition-colors duration-300 leading-snug">
+            {project.title}
+          </h3>
+          <span className="font-sans text-[10px] text-stone-400 dark:text-stone-500 ml-2 shrink-0">
+            {project.year}
+          </span>
+        </div>
         <p className="font-sans text-xs text-stone-500 dark:text-stone-400 leading-relaxed mb-3 flex-grow">
           {project.description}
         </p>
-        <div className="pt-3 border-t border-stone-50 dark:border-stone-800/60">
+        <div className="pt-3 border-t border-stone-50 dark:border-stone-800/60 flex items-center justify-between">
           <TagList tags={project.tags} />
+          <div className="flex gap-1.5 ml-2 shrink-0">
+            {project.github && (
+              <a href={project.github} target="_blank" rel="noopener noreferrer"
+                className="p-1.5 rounded-full text-stone-400 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
+                onClick={(e) => e.stopPropagation()}>
+                <Github className="h-3.5 w-3.5" />
+              </a>
+            )}
+            {project.live && (
+              <a href={project.live} target="_blank" rel="noopener noreferrer"
+                className="p-1.5 rounded-full text-stone-400 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
+                onClick={(e) => e.stopPropagation()}>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </motion.div>
@@ -105,7 +127,17 @@ const ProjectsComponent = () => {
 
   const projects: Project[] = [
     {
+      title: "TrackEfron",
+      year: "2026",
+      description: "Full-stack movie and TV tracking application with a personalised recommendation engine built from scratch.",
+      image: "/logos/trackefron.png",
+      tags: ["Next.js", "TypeScript", "Python", "Recommendation Engine"],
+      github: "https://github.com/rohanjaggi/TrackEfron",
+      live: "https://track-efron.vercel.app",
+    },
+    {
       title: "Resurect",
+      year: "2025",
       description: "Resume optimiser leveraging ML for individuals to receive tailored insights into their skills, and targeted recommendations.",
       image: "/logos/resurect.png",
       tags: ["Python", "FastAPI", "jobLib", "SpaCy", "React", "Tailwind CSS"],
@@ -114,6 +146,7 @@ const ProjectsComponent = () => {
     },
     {
       title: "Nomsters",
+      year: "2025",
       description: "Full-stack app for discovering and sharing food places in Singapore, featuring reviews and a dynamic map interface.",
       image: "/logos/nomster.png",
       imageFit: "contain",
@@ -121,14 +154,8 @@ const ProjectsComponent = () => {
       live: "https://nomster-13cf2.web.app/",
     },
     {
-      title: "NUS Buffet Buddy",
-      description: "Full-stack app to reduce food waste in NUS by advertising extra food to the wider campus community.",
-      image: "/logos/buffet-buddy.png",
-      tags: ["React Native", "TypeScript", "Firebase"],
-      github: "https://github.com/rohanjaggi/NUS-Buffet-Buddy",
-    },
-    {
       title: "HashGen for TikTok",
+      year: "2024",
       description: "TikTok hashtag generator using ML to help creators boost visibility and engagement.",
       image: "/logos/tiktok.png",
       tags: ["React", "Next.js", "Python", "Hugging Face", "OpenAI"],
@@ -160,7 +187,7 @@ const ProjectsComponent = () => {
               transition={{ duration: 0.55 }}
               className="font-sans text-rose-800 dark:text-rose-400 text-xs tracking-[0.28em] uppercase mb-3"
             >
-              Work
+              Personal
             </motion.p>
             <motion.h2
               initial={{ clipPath: "inset(100% 0 0 0)" }}
