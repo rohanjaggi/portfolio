@@ -56,6 +56,7 @@ const HomeComponent = () => {
             alt="Rohan Jaggi"
             fill
             className="object-cover object-[center_15%]"
+            sizes="(max-width: 1023px) 0px, 52vw"
             priority
           />
         </div>
@@ -186,6 +187,7 @@ const HomeComponent = () => {
                       alt="Rohan Jaggi"
                       fill
                       className="object-cover object-[center_15%]"
+                      sizes="clamp(220px, 70vw, 300px)"
                       priority
                     />
                   </div>
@@ -198,12 +200,13 @@ const HomeComponent = () => {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-default select-none z-10"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-default select-none z-10 bg-transparent border-none"
         onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+        aria-label="Scroll to about section"
       >
         <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-stone-300 dark:text-stone-600">
           scroll
@@ -214,7 +217,7 @@ const HomeComponent = () => {
         >
           <ArrowDown className="h-3.5 w-3.5 text-stone-300 dark:text-stone-600" />
         </motion.div>
-      </motion.div>
+      </motion.button>
     </section>
   );
 };

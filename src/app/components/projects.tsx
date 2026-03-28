@@ -52,6 +52,7 @@ const ProjectCard = ({ project, index, inView }: { project: Project; index: numb
             src={project.image}
             alt={project.title}
             fill
+            sizes="(max-width: 640px) 100vw, 50vw"
             style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
             className={project.imageFit === "contain" ? "object-contain p-6" : "object-cover"}
           />
