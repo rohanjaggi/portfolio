@@ -14,6 +14,7 @@ interface Project {
   github?: string;
   live?: string;
   imageFit?: "cover" | "contain";
+  imagePosition?: string;
 }
 
 const TagList = ({ tags }: { tags: string[] }) => (
@@ -51,6 +52,7 @@ const ProjectCard = ({ project, index, inView }: { project: Project; index: numb
             src={project.image}
             alt={project.title}
             fill
+            style={project.imagePosition ? { objectPosition: project.imagePosition } : undefined}
             className={project.imageFit === "contain" ? "object-contain p-6" : "object-cover"}
           />
         </motion.div>
@@ -130,7 +132,8 @@ const ProjectsComponent = () => {
       title: "TrackEfron",
       year: "2026",
       description: "Full-stack movie and TV tracking application with a personalised recommendation engine built from scratch.",
-      image: "/logos/trackefron.png",
+      image: "/logos/track_efron.png",
+      imagePosition: "40% center",
       tags: ["Next.js", "TypeScript", "Python", "Recommendation Engine"],
       github: "https://github.com/rohanjaggi/TrackEfron",
       live: "https://track-efron.vercel.app",

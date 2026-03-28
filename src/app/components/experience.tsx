@@ -11,7 +11,7 @@ interface Experience {
   description: string[];
   date: string;
   logo: string;
-  logoRound?: boolean;
+  logoDarkInvert?: boolean;
 }
 
 const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
@@ -45,8 +45,8 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
 
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2.5">
           <div className="flex items-center gap-3">
-            <div className={`w-9 h-9 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm border border-stone-100 dark:border-stone-700 bg-white dark:bg-stone-800 ${exp.logoRound ? "rounded-full" : "rounded-lg"}`}>
-              <Image src={`/logos/${exp.logo}`} alt={exp.company} width={28} height={28} className="object-contain" />
+            <div className="w-9 h-9 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm border border-stone-100 dark:border-stone-700 bg-white dark:bg-stone-800 rounded-lg">
+              <Image src={`/logos/${exp.logo}`} alt={exp.company} width={28} height={28} className={`object-contain ${exp.logoDarkInvert ? "dark:invert" : ""}`} />
             </div>
             <div>
               <h3 className="font-serif font-bold text-base leading-snug text-stone-900 dark:text-stone-50">
@@ -99,7 +99,7 @@ const ExperienceComponent = () => {
       location: "Singapore",
       description: ["Responsible AI", "LLM Evaluations"],
       date: "Jan 2026 – Jun 2026",
-      logo: "nus.png",
+      logo: "govtech.avif",
     },
     {
       title: "AI Engineer Intern",
@@ -108,6 +108,7 @@ const ExperienceComponent = () => {
       description: ["LLM-as-a-Judge", "Production grade backend service"],
       date: "May 2025 – Aug 2025",
       logo: "singtel.png",
+      logoDarkInvert: true,
     },
     {
       title: "Software Engineering Intern",
@@ -116,7 +117,6 @@ const ExperienceComponent = () => {
       description: ["Full-stack development"],
       date: "Jan 2025 – May 2025",
       logo: "qumo.jpeg",
-      logoRound: true,
     },
     {
       title: "Business Analytics Teaching Assistant",

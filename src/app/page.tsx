@@ -8,19 +8,24 @@ import ContactComponent from "./components/contact-me";
 import {
   SiPython, SiPytorch, SiTensorflow, SiScikitlearn,
   SiPandas, SiNumpy, SiJupyter, SiReact, SiDocker, SiPostgresql,
+  SiFastapi, SiFlask, SiNextdotjs, SiR,
 } from "@icons-pack/react-simple-icons";
 
 const techStack = [
   { name: "Python",       icon: <SiPython      size={15} color="currentColor" /> },
+  { name: "R",            icon: <SiR            size={15} color="currentColor" /> },
   { name: "PyTorch",      icon: <SiPytorch     size={15} color="currentColor" /> },
   { name: "TensorFlow",   icon: <SiTensorflow  size={15} color="currentColor" /> },
   { name: "scikit-learn", icon: <SiScikitlearn size={15} color="currentColor" /> },
+  { name: "FastAPI",      icon: <SiFastapi     size={15} color="currentColor" /> },
+  { name: "Flask",        icon: <SiFlask       size={15} color="currentColor" /> },
+  { name: "Next.js",      icon: <SiNextdotjs   size={15} color="currentColor" /> },
+  { name: "React",        icon: <SiReact       size={15} color="currentColor" /> },
   { name: "Pandas",       icon: <SiPandas      size={15} color="currentColor" /> },
   { name: "NumPy",        icon: <SiNumpy       size={15} color="currentColor" /> },
-  { name: "Jupyter",      icon: <SiJupyter     size={15} color="currentColor" /> },
-  { name: "React",        icon: <SiReact       size={15} color="currentColor" /> },
-  { name: "Docker",       icon: <SiDocker      size={15} color="currentColor" /> },
   { name: "PostgreSQL",   icon: <SiPostgresql  size={15} color="currentColor" /> },
+  { name: "Docker",       icon: <SiDocker      size={15} color="currentColor" /> },
+  { name: "Jupyter",      icon: <SiJupyter     size={15} color="currentColor" /> },
 ];
 
 const TechMarquee = () => (
