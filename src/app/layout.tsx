@@ -3,6 +3,7 @@ import { DM_Sans, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "./components/theme-provider"
 import "./globals.css";
 import Footer from "./components/footer";
+import { Analytics } from "@vercel/analytics/react";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -38,6 +39,7 @@ export default function RootLayout({
         >
           {children}
           <Footer />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
