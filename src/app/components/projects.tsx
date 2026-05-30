@@ -63,28 +63,25 @@ const ProjectCard = ({ project, index, inView }: { project: Project; index: numb
           transition={{ duration: 0.3 }}
           className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"
         />
-        {/* Links appear on hover */}
-        <motion.div
-          initial={{ opacity: 0, y: 4 }}
-          whileHover={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2 }}
-          className="absolute top-2.5 right-2.5 flex gap-1.5"
+        {/* Links — always visible on touch, hover-reveal on desktop */}
+        <div
+          className="absolute top-2.5 right-2.5 flex gap-1.5 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:translate-y-0 sm:group-hover:translate-y-0 transition-all duration-200"
         >
           {project.github && (
             <a href={project.github} target="_blank" rel="noopener noreferrer"
-              className="p-1.5 rounded-full bg-white/90 dark:bg-stone-900/90 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
+              className="p-2.5 sm:p-1.5 rounded-full bg-white/90 dark:bg-stone-900/90 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
               onClick={(e) => e.stopPropagation()}>
-              <Github className="h-3 w-3" />
+              <Github className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
             </a>
           )}
           {project.live && (
             <a href={project.live} target="_blank" rel="noopener noreferrer"
-              className="p-1.5 rounded-full bg-white/90 dark:bg-stone-900/90 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
+              className="p-2.5 sm:p-1.5 rounded-full bg-white/90 dark:bg-stone-900/90 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
               onClick={(e) => e.stopPropagation()}>
-              <ExternalLink className="h-3 w-3" />
+              <ExternalLink className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
             </a>
           )}
-        </motion.div>
+        </div>
       </div>
 
       {/* Content */}
@@ -171,12 +168,12 @@ const ProjectsComponent = () => {
     <section
       id="projects"
       ref={sectionRef}
-      className="px-6 sm:px-12 lg:px-20 xl:px-32 py-24 lg:py-32"
+      className="px-6 sm:px-12 lg:px-20 xl:px-32 py-16 sm:py-24 lg:py-32"
     >
       <div className="max-w-7xl mx-auto">
 
         {/* Section header — centred */}
-        <div className="mb-16 relative text-center">
+        <div className="mb-10 sm:mb-16 relative text-center">
           <span
             className="absolute -top-6 left-1/2 -translate-x-1/2 font-serif font-bold text-stone-100 dark:text-stone-800/70 select-none pointer-events-none leading-none"
             style={{ fontSize: "clamp(6rem, 14vw, 11rem)", zIndex: 0 }}

@@ -27,7 +27,7 @@ const ContactComponent = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="px-6 sm:px-12 lg:px-20 xl:px-32 py-24 lg:py-40 relative overflow-hidden"
+      className="px-6 sm:px-12 lg:px-20 xl:px-32 py-16 sm:py-24 lg:py-40 relative overflow-hidden"
     >
       {/* Decorative background glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-rose-100/30 dark:bg-rose-950/20 rounded-full blur-[100px] -z-10 pointer-events-none" />
@@ -35,7 +35,7 @@ const ContactComponent = () => {
       <div className="max-w-7xl mx-auto">
 
         {/* Section header — centred */}
-        <div className="mb-16 relative text-center">
+        <div className="mb-10 sm:mb-16 relative text-center">
           <span
             className="absolute -top-6 left-1/2 -translate-x-1/2 font-serif font-bold text-stone-100 dark:text-stone-800/70 select-none pointer-events-none leading-none"
             style={{ fontSize: "clamp(6rem, 14vw, 11rem)", zIndex: 0 }}
@@ -86,7 +86,7 @@ const ContactComponent = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.48 + i * 0.12, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ y: -5, boxShadow: "0 16px 48px -8px rgba(0,0,0,0.12)" }}
-              className="group flex items-center justify-between gap-10 p-6 rounded-2xl border border-stone-100 dark:border-stone-800 bg-white dark:bg-stone-900/30 hover:border-stone-200 dark:hover:border-stone-700 transition-all duration-300 min-w-[300px]"
+              className="group flex items-center justify-between gap-4 sm:gap-10 p-5 sm:p-6 rounded-2xl border border-stone-100 dark:border-stone-800 bg-white dark:bg-stone-900/30 hover:border-stone-200 dark:hover:border-stone-700 transition-all duration-300 w-full sm:min-w-[300px]"
             >
               <div className="flex items-center gap-4">
                 <div className="p-3 rounded-xl bg-stone-50 dark:bg-stone-800 text-stone-600 dark:text-stone-400 group-hover:bg-rose-50 dark:group-hover:bg-rose-950/40 group-hover:text-rose-800 dark:group-hover:text-rose-400 transition-all duration-300">

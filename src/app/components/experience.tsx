@@ -132,12 +132,12 @@ const ExperienceComponent = () => {
     <section
       id="experience"
       ref={sectionRef}
-      className="px-6 sm:px-12 lg:px-20 xl:px-32 py-24 lg:py-32"
+      className="px-6 sm:px-12 lg:px-20 xl:px-32 py-16 sm:py-24 lg:py-32"
     >
       <div className="max-w-7xl mx-auto">
 
         {/* Section header — centred */}
-        <div className="mb-16 relative text-center">
+        <div className="mb-10 sm:mb-16 relative text-center">
           <span
             className="absolute -top-6 left-1/2 -translate-x-1/2 font-serif font-bold text-stone-100 dark:text-stone-800/70 select-none pointer-events-none leading-none"
             style={{ fontSize: "clamp(6rem, 14vw, 11rem)", zIndex: 0 }}

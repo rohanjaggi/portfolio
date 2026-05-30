@@ -122,17 +122,18 @@ const Navbar = () => {
         </div>
 
         {/* Mobile controls */}
-        <div className="flex sm:hidden items-center gap-2">
+        <div className="flex sm:hidden items-center gap-1">
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-full text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all"
+            className="p-3 rounded-full text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all"
             aria-label="Toggle theme"
           >
-            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {theme === "dark" ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-full text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all"
+            className="p-3 rounded-full text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all"
+            aria-label="Toggle menu"
           >
             <AnimatePresence mode="wait" initial={false}>
               {mobileMenuOpen ? (
@@ -167,7 +168,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.06 }}
                   onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left px-3 py-3 rounded-lg font-sans text-sm font-medium transition-all ${
+                  className={`block w-full text-left px-4 py-3.5 rounded-lg font-sans text-[15px] font-medium transition-all ${
                     activeSection === item.id
                       ? "text-stone-900 dark:text-stone-50 bg-stone-100 dark:bg-stone-800"
                       : "text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-900"

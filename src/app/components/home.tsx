@@ -74,8 +74,8 @@ const HomeComponent = () => {
           <div className="hidden lg:block" />
 
           {/* Right: text centred within the right half */}
-          <div className="flex items-center justify-center px-6 sm:px-12 lg:px-12 xl:px-20 py-16 lg:py-0">
-            <motion.div style={{ y: textY }} className="w-full max-w-lg">
+          <div className="flex items-center justify-center px-6 sm:px-12 lg:px-12 xl:px-20 py-10 sm:py-16 lg:py-0">
+            <motion.div style={{ y: textY }} className="w-full max-w-lg text-center lg:text-left flex flex-col items-center lg:items-start">
 
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
@@ -110,7 +110,7 @@ const HomeComponent = () => {
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.9, delay: 0.72, ease: [0.16, 1, 0.3, 1] }}
-                className="origin-left h-px w-full max-w-xs bg-gradient-to-r from-stone-300 dark:from-stone-700 to-transparent my-7"
+                className="origin-center lg:origin-left h-px w-full max-w-xs bg-gradient-to-r from-transparent via-stone-300 dark:via-stone-700 to-transparent lg:from-stone-300 lg:dark:from-stone-700 lg:via-transparent lg:to-transparent my-7"
               />
 
               {/* Role switcher */}
@@ -118,7 +118,7 @@ const HomeComponent = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.88 }}
-                className="flex items-center gap-3 mb-9 h-6"
+                className="flex items-center justify-center lg:justify-start gap-3 mb-9 h-6"
               >
                 <span className="font-sans text-stone-500 dark:text-stone-400 text-sm">
                   Aspiring
@@ -144,7 +144,7 @@ const HomeComponent = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 1.05 }}
-                className="flex flex-wrap gap-3"
+                className="flex flex-wrap gap-3 justify-center lg:justify-start"
               >
                 <a
                   href="https://linkedin.com/in/rohan-jaggi"
@@ -166,33 +166,6 @@ const HomeComponent = () => {
                 </a>
               </motion.div>
 
-              {/* Mobile photo */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="mt-10 lg:hidden"
-              >
-                <div
-                  style={{
-                    width: "clamp(220px, 70vw, 300px)",
-                    height: "clamp(220px, 70vw, 300px)",
-                    maskImage: "radial-gradient(ellipse 78% 82% at 50% 42%, black 38%, transparent 82%)",
-                    WebkitMaskImage: "radial-gradient(ellipse 78% 82% at 50% 42%, black 38%, transparent 82%)",
-                  }}
-                >
-                  <div className="relative w-full h-full">
-                    <Image
-                      src="/mee.jpg"
-                      alt="Rohan Jaggi"
-                      fill
-                      className="object-cover object-[center_15%]"
-                      sizes="clamp(220px, 70vw, 300px)"
-                      priority
-                    />
-                  </div>
-                </div>
-              </motion.div>
 
             </motion.div>
           </div>
@@ -204,7 +177,7 @@ const HomeComponent = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-default select-none z-10 bg-transparent border-none"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 cursor-default select-none z-10 bg-transparent border-none hidden sm:flex"
         onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
         aria-label="Scroll to about section"
       >
