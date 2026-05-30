@@ -64,16 +64,6 @@ const ContactComponent = () => {
           </div>
         </div>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.35 }}
-          className="font-sans text-stone-500 dark:text-stone-400 text-base mb-10 text-center leading-relaxed"
-        >
-          Whether it&apos;s a project, opportunity, or just a conversation — I&apos;d love to hear from you.
-        </motion.p>
-
         {/* Contact cards */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           {contactMethods.map((method, i) => (
