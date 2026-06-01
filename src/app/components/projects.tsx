@@ -22,7 +22,7 @@ const TagList = ({ tags }: { tags: string[] }) => (
     {tags.map((tag) => (
       <span
         key={tag}
-        className="font-sans text-[11px] px-2.5 py-1 rounded-full bg-stone-50 dark:bg-stone-800/80 text-stone-500 dark:text-stone-400 border border-stone-100 dark:border-stone-700/60"
+        className="font-mono text-[11px] px-2.5 py-1 rounded-full bg-white/[0.04] text-[oklch(0.58_0.01_250)] border border-white/[0.06]"
       >
         {tag}
       </span>
@@ -39,10 +39,9 @@ const ProjectCard = ({ project, index, inView }: { project: Project; index: numb
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 280, damping: 22 }}
-      className="group border border-stone-100 dark:border-stone-800 rounded-2xl overflow-hidden bg-white dark:bg-stone-900/35 hover:border-stone-200 dark:hover:border-stone-700 hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.11)] dark:hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.35)] transition-all duration-500 flex flex-col h-full"
+      className="group border border-white/[0.06] rounded-2xl overflow-hidden bg-white/[0.02] hover:border-white/[0.1] hover:shadow-[0_16px_48px_-12px_rgba(0,0,0,0.4)] transition-all duration-500 flex flex-col h-full"
     >
-      {/* Image */}
-      <div className="relative h-36 overflow-hidden bg-stone-100 dark:bg-stone-800">
+      <div className="relative h-36 overflow-hidden bg-white/[0.03]">
         <motion.div
           className="absolute inset-0"
           whileHover={{ scale: 1.05 }}
@@ -57,26 +56,19 @@ const ProjectCard = ({ project, index, inView }: { project: Project; index: numb
             className={project.imageFit === "contain" ? "object-contain p-6" : "object-cover"}
           />
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"
-        />
-        {/* Links — always visible on touch, hover-reveal on desktop */}
         <div
-          className="absolute top-2.5 right-2.5 flex gap-1.5 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:translate-y-0 sm:group-hover:translate-y-0 transition-all duration-200"
+          className="absolute top-2.5 right-2.5 flex gap-1.5 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200"
         >
           {project.github && (
             <a href={project.github} target="_blank" rel="noopener noreferrer"
-              className="p-2.5 sm:p-1.5 rounded-full bg-white/90 dark:bg-stone-900/90 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
+              className="p-2.5 sm:p-1.5 rounded-full bg-[oklch(0.13_0.01_250/0.9)] text-[oklch(0.7_0.01_80)] hover:text-[oklch(0.75_0.12_75)] transition-colors"
               onClick={(e) => e.stopPropagation()}>
               <Github className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
             </a>
           )}
           {project.live && (
             <a href={project.live} target="_blank" rel="noopener noreferrer"
-              className="p-2.5 sm:p-1.5 rounded-full bg-white/90 dark:bg-stone-900/90 text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
+              className="p-2.5 sm:p-1.5 rounded-full bg-[oklch(0.13_0.01_250/0.9)] text-[oklch(0.7_0.01_80)] hover:text-[oklch(0.75_0.12_75)] transition-colors"
               onClick={(e) => e.stopPropagation()}>
               <ExternalLink className="h-3.5 w-3.5 sm:h-3 sm:w-3" />
             </a>
@@ -84,32 +76,31 @@ const ProjectCard = ({ project, index, inView }: { project: Project; index: numb
         </div>
       </div>
 
-      {/* Content */}
       <div className="p-4 sm:p-5 flex flex-col flex-grow">
         <div className="flex items-baseline justify-between mb-1.5">
-          <h3 className="font-serif font-bold text-base text-stone-900 dark:text-stone-50 group-hover:text-rose-800 dark:group-hover:text-rose-400 transition-colors duration-300 leading-snug">
+          <h3 className="font-display font-bold text-base text-[oklch(0.92_0.01_80)] group-hover:text-[oklch(0.75_0.12_75)] transition-colors duration-300 leading-snug">
             {project.title}
           </h3>
-          <span className="font-sans text-[10px] text-stone-400 dark:text-stone-500 ml-2 shrink-0">
+          <span className="font-mono text-[10px] text-[oklch(0.62_0.09_75)] ml-2 shrink-0">
             {project.year}
           </span>
         </div>
-        <p className="font-sans text-xs text-stone-500 dark:text-stone-400 leading-relaxed mb-3 flex-grow">
+        <p className="font-sans text-xs text-[oklch(0.58_0.01_250)] leading-relaxed mb-3 flex-grow">
           {project.description}
         </p>
-        <div className="pt-3 border-t border-stone-50 dark:border-stone-800/60 flex items-center justify-between">
+        <div className="pt-3 border-t border-white/[0.05] flex items-center justify-between">
           <TagList tags={project.tags} />
           <div className="flex gap-1.5 ml-2 shrink-0">
             {project.github && (
               <a href={project.github} target="_blank" rel="noopener noreferrer"
-                className="p-1.5 rounded-full text-stone-400 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
+                className="p-1.5 rounded-full text-[oklch(0.45_0.01_250)] hover:text-[oklch(0.75_0.12_75)] transition-colors"
                 onClick={(e) => e.stopPropagation()}>
                 <Github className="h-3.5 w-3.5" />
               </a>
             )}
             {project.live && (
               <a href={project.live} target="_blank" rel="noopener noreferrer"
-                className="p-1.5 rounded-full text-stone-400 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300 transition-colors"
+                className="p-1.5 rounded-full text-[oklch(0.45_0.01_250)] hover:text-[oklch(0.75_0.12_75)] transition-colors"
                 onClick={(e) => e.stopPropagation()}>
                 <ExternalLink className="h-3.5 w-3.5" />
               </a>
@@ -145,23 +136,6 @@ const ProjectsComponent = () => {
       github: "https://github.com/pastchum/htmlheroes",
       live: "https://youtu.be/HGL1Ke0WO5k",
     },
-    {
-      title: "Nomsters",
-      year: "2025",
-      description: "Full-stack app for discovering and sharing food places in Singapore, featuring reviews and a dynamic map interface.",
-      image: "/logos/nomster.png",
-      imageFit: "contain",
-      tags: ["Vue.js", "Vite", "Firebase", "PrimeVue", "Google Maps API"],
-      live: "https://nomster-13cf2.web.app/",
-    },
-    {
-      title: "HashGen for TikTok",
-      year: "2024",
-      description: "TikTok hashtag generator using ML to help creators boost visibility and engagement.",
-      image: "/logos/tiktok.png",
-      tags: ["React", "Next.js", "Python", "Hugging Face", "OpenAI"],
-      github: "https://github.com/jensenhuangyankai/tiktok-techjam2024",
-    },
   ];
 
   return (
@@ -172,37 +146,18 @@ const ProjectsComponent = () => {
     >
       <div className="max-w-7xl mx-auto">
 
-        {/* Section header — centred */}
-        <div className="mb-10 sm:mb-16 relative text-center">
-          <span
-            className="absolute -top-6 left-1/2 -translate-x-1/2 font-serif font-bold text-stone-100 dark:text-stone-800/70 select-none pointer-events-none leading-none"
-            style={{ fontSize: "clamp(6rem, 14vw, 11rem)", zIndex: 0 }}
-            aria-hidden
+        <div className="mb-10 sm:mb-16 text-center">
+          <motion.h2
+            initial={{ clipPath: "inset(100% 0 0 0)" }}
+            animate={inView ? { clipPath: "inset(0% 0 -30% 0)" } : { clipPath: "inset(100% 0 0 0)" }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="font-display font-bold text-brass-metallic"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
           >
-            03
-          </span>
-          <div className="relative" style={{ zIndex: 1 }}>
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55 }}
-              className="font-sans text-rose-800 dark:text-rose-400 text-xs tracking-[0.28em] uppercase mb-3"
-            >
-              Personal
-            </motion.p>
-            <motion.h2
-              initial={{ clipPath: "inset(100% 0 0 0)" }}
-              animate={inView ? { clipPath: "inset(0% 0 -30% 0)" } : { clipPath: "inset(100% 0 0 0)" }}
-              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              className="font-serif font-bold text-stone-900 dark:text-stone-50"
-              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
-            >
-              Projects
-            </motion.h2>
-          </div>
+            Projects
+          </motion.h2>
         </div>
 
-        {/* Uniform 2-col grid — centred */}
         <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
           {projects.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} inView={inView} />

@@ -26,7 +26,6 @@ const HomeComponent = () => {
       id="home"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16"
     >
-      {/* Full-bleed photo — starts below navbar, left side */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -62,18 +61,10 @@ const HomeComponent = () => {
         </div>
       </motion.div>
 
-      {/*
-        Full-width 2-column grid so the right column is always exactly
-        the right half of the screen, regardless of viewport width.
-        Left col = empty spacer (photo shows through). Right col = text.
-      */}
       <div className="relative z-10 w-full flex-1 flex items-center">
         <div className="w-full grid grid-cols-1 lg:grid-cols-[52%_48%]">
-
-          {/* Left: spacer — photo fills this on desktop */}
           <div className="hidden lg:block" />
 
-          {/* Right: text centred within the right half */}
           <div className="flex items-center justify-center px-6 sm:px-12 lg:px-12 xl:px-20 py-10 sm:py-16 lg:py-0">
             <motion.div style={{ y: textY }} className="w-full max-w-lg text-center lg:text-left flex flex-col items-center lg:items-start">
 
@@ -81,7 +72,7 @@ const HomeComponent = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="font-sans text-stone-400 dark:text-stone-500 text-xs tracking-[0.32em] uppercase mb-7"
+                className="font-mono text-[oklch(0.62_0.09_75)] text-xs tracking-[0.2em] uppercase mb-7"
               >
                 Hello, I&apos;m
               </motion.p>
@@ -90,7 +81,7 @@ const HomeComponent = () => {
                 initial={{ clipPath: "inset(100% 0 0 0)" }}
                 animate={{ clipPath: "inset(0% 0 -50% 0)" }}
                 transition={{ duration: 0.9, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif font-bold text-stone-900 dark:text-stone-50 leading-none"
+                className="font-display font-bold text-[oklch(0.92_0.01_80)] leading-none"
                 style={{ fontSize: "clamp(3.5rem, 7vw, 7rem)" }}
               >
                 Rohan
@@ -100,8 +91,8 @@ const HomeComponent = () => {
                 initial={{ clipPath: "inset(100% 0 0 0)" }}
                 animate={{ clipPath: "inset(0% 0 -60% 0)" }}
                 transition={{ duration: 0.9, delay: 0.46, ease: [0.16, 1, 0.3, 1] }}
-                className="font-serif font-bold italic text-rose-800 dark:text-rose-400 leading-none"
-                style={{ fontSize: "clamp(3.5rem, 7vw, 7rem)" }}
+                className="font-display font-bold text-brass-metallic pb-2"
+                style={{ fontSize: "clamp(3.5rem, 7vw, 7rem)", lineHeight: 1.1 }}
               >
                 Jaggi
               </motion.h1>
@@ -110,17 +101,16 @@ const HomeComponent = () => {
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.9, delay: 0.72, ease: [0.16, 1, 0.3, 1] }}
-                className="origin-center lg:origin-left h-px w-full max-w-xs bg-gradient-to-r from-transparent via-stone-300 dark:via-stone-700 to-transparent lg:from-stone-300 lg:dark:from-stone-700 lg:via-transparent lg:to-transparent my-7"
+                className="origin-center lg:origin-left h-px w-full max-w-xs bg-[oklch(0.75_0.12_75/0.3)] my-7"
               />
 
-              {/* Role switcher */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.88 }}
                 className="flex items-center justify-center lg:justify-start gap-3 mb-9 h-6"
               >
-                <span className="font-sans text-stone-500 dark:text-stone-400 text-sm">
+                <span className="font-sans text-[oklch(0.55_0.01_250)] text-sm">
                   Aspiring
                 </span>
                 <div className="relative h-full flex items-center min-w-[160px]">
@@ -131,7 +121,7 @@ const HomeComponent = () => {
                       animate={{ y: 0, opacity: 1 }}
                       exit={{ y: -22, opacity: 0 }}
                       transition={{ duration: 0.32, ease: "easeOut" }}
-                      className="font-sans font-bold text-stone-900 dark:text-stone-100 text-sm absolute whitespace-nowrap"
+                      className="font-sans font-bold text-[oklch(0.92_0.01_80)] text-sm absolute whitespace-nowrap"
                     >
                       {roles[roleIndex]}
                     </motion.span>
@@ -139,7 +129,6 @@ const HomeComponent = () => {
                 </div>
               </motion.div>
 
-              {/* CTAs */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -150,7 +139,7 @@ const HomeComponent = () => {
                   href="https://linkedin.com/in/rohan-jaggi"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#0077B5] text-white rounded-full font-sans font-medium text-sm transition-all duration-300 hover:bg-[#006399] hover:shadow-[0_8px_24px_-4px_rgba(0,119,181,0.4)] hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[oklch(0.75_0.12_75)] text-[oklch(0.13_0.01_250)] rounded-full font-sans font-medium text-sm transition-all duration-300 hover:bg-[oklch(0.82_0.12_75)] hover:shadow-[0_8px_24px_-4px_oklch(0.75_0.12_75/0.35)] hover:-translate-y-0.5"
                 >
                   <Linkedin className="h-4 w-4" />
                   LinkedIn
@@ -159,20 +148,18 @@ const HomeComponent = () => {
                   href="https://github.com/rohanjaggi"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 rounded-full font-sans font-medium text-sm transition-all duration-300 hover:bg-stone-700 dark:hover:bg-white hover:shadow-[0_8px_24px_-4px_rgba(0,0,0,0.2)] hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-white/[0.1] text-[oklch(0.85_0.01_80)] rounded-full font-sans font-medium text-sm transition-all duration-300 hover:border-[oklch(0.75_0.12_75/0.4)] hover:text-[oklch(0.75_0.12_75)] hover:-translate-y-0.5"
                 >
                   <Github className="h-4 w-4" />
                   GitHub
                 </a>
               </motion.div>
 
-
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -181,14 +168,14 @@ const HomeComponent = () => {
         onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
         aria-label="Scroll to about section"
       >
-        <span className="font-sans text-[9px] tracking-[0.3em] uppercase text-stone-300 dark:text-stone-600">
+        <span className="font-mono text-[9px] tracking-[0.3em] uppercase text-[oklch(0.45_0.01_250)]">
           scroll
         </span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ArrowDown className="h-3.5 w-3.5 text-stone-300 dark:text-stone-600" />
+          <ArrowDown className="h-3.5 w-3.5 text-[oklch(0.45_0.01_250)]" />
         </motion.div>
       </motion.button>
     </section>

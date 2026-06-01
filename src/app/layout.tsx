@@ -1,21 +1,26 @@
 import type { Metadata } from "next";
-import { DM_Sans, Playfair_Display } from "next/font/google";
-import { ThemeProvider } from "./components/theme-provider"
+import { Archivo, Sora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/footer";
+import SmoothScroll from "./components/smooth-scroll";
 import { Analytics } from "@vercel/analytics/react";
 
-const dmSans = DM_Sans({
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-archivo",
   display: "swap",
 });
 
-const playfair = Playfair_Display({
+const sora = Sora({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-sora",
   display: "swap",
-  style: ["normal", "italic"],
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -29,18 +34,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${dmSans.variable} ${playfair.variable}`}>
+    <html lang="en" className={`dark ${archivo.variable} ${sora.variable} ${jetbrains.variable}`}>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Footer />
-          <Analytics />
-        </ThemeProvider>
+        <SmoothScroll />
+        {children}
+        <Footer />
+        <Analytics />
       </body>
     </html>
   );
