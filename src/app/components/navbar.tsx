@@ -1,16 +1,13 @@
 "use client"
 
 import React, { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
-import { Moon, Sun, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
-  const { setTheme, theme } = useTheme();
   const [activeSection, setActiveSection] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -54,20 +51,18 @@ const Navbar = () => {
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-white/90 dark:bg-stone-950/90 backdrop-blur-md shadow-sm border-b border-stone-100 dark:border-stone-800/60"
+          ? "bg-[oklch(0.13_0.01_250/0.92)] backdrop-blur-md border-b border-white/[0.06]"
           : "bg-transparent"
       }`}
     >
       <nav className="px-6 sm:px-12 lg:px-20 xl:px-32 h-16 flex items-center justify-between">
-        {/* Logo */}
         <button
           onClick={() => scrollToSection("home")}
-          className="font-serif font-bold text-xl text-rose-800 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 transition-colors"
+          className="font-display font-bold text-xl text-brass-metallic hover:text-brass-metallic-hover transition-colors"
         >
           Rohan Jaggi
         </button>
 
-        {/* Desktop nav */}
         <div className="hidden sm:flex items-center gap-8">
           {navItems.map((item) => (
             <button
@@ -75,64 +70,27 @@ const Navbar = () => {
               onClick={() => scrollToSection(item.id)}
               className={`relative font-sans text-sm font-medium transition-colors duration-200 py-1 ${
                 activeSection === item.id
-                  ? "text-stone-900 dark:text-stone-50"
-                  : "text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200"
+                  ? "text-[oklch(0.92_0.01_80)]"
+                  : "text-[oklch(0.55_0.01_250)] hover:text-[oklch(0.78_0.01_80)]"
               }`}
             >
               {item.label}
               {activeSection === item.id && (
                 <motion.div
                   layoutId="activeNav"
-                  className="absolute -bottom-0.5 left-0 right-0 h-[2px] bg-rose-800 dark:bg-rose-400 rounded-full"
+                  className="absolute -bottom-0.5 left-0 right-0 h-[2px] bg-[oklch(0.75_0.12_75)] rounded-full"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
             </button>
           ))}
-
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-full text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all"
-            aria-label="Toggle theme"
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              {theme === "dark" ? (
-                <motion.div
-                  key="sun"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Sun className="h-4 w-4" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="moon"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Moon className="h-4 w-4" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </button>
         </div>
 
-        {/* Mobile controls */}
-        <div className="flex sm:hidden items-center gap-2">
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-full text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all"
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-          </button>
+        <div className="flex sm:hidden items-center">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-full text-stone-500 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-800 transition-all"
+            className="p-3 rounded-full text-[oklch(0.55_0.01_250)] hover:text-[oklch(0.78_0.01_80)] transition-all"
+            aria-label="Toggle menu"
           >
             <AnimatePresence mode="wait" initial={false}>
               {mobileMenuOpen ? (
@@ -149,7 +107,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -157,7 +114,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="sm:hidden overflow-hidden bg-white/97 dark:bg-stone-950/97 backdrop-blur-md border-b border-stone-100 dark:border-stone-800/60"
+            className="sm:hidden overflow-hidden bg-[oklch(0.13_0.01_250/0.97)] backdrop-blur-md border-b border-white/[0.06]"
           >
             <div className="px-6 py-3 space-y-0.5">
               {navItems.map((item, i) => (
@@ -167,10 +124,10 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.06 }}
                   onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left px-3 py-3 rounded-lg font-sans text-sm font-medium transition-all ${
+                  className={`block w-full text-left px-4 py-3.5 rounded-lg font-sans text-[15px] font-medium transition-all ${
                     activeSection === item.id
-                      ? "text-stone-900 dark:text-stone-50 bg-stone-100 dark:bg-stone-800"
-                      : "text-stone-500 dark:text-stone-400 hover:bg-stone-50 dark:hover:bg-stone-900"
+                      ? "text-[oklch(0.92_0.01_80)] bg-white/[0.05]"
+                      : "text-[oklch(0.55_0.01_250)] hover:bg-white/[0.03]"
                   }`}
                 >
                   {item.label}
@@ -180,7 +137,6 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
     </motion.header>
   );
 };
