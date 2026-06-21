@@ -95,7 +95,7 @@ const ExperienceComponent = () => {
       title: "Summer Analyst",
       company: "BlackRock",
       location: "Singapore",
-      description: ["Aladdin", "Client Business"],
+      description: ["Aladdin"],
       date: "Jun 2026 – Aug 2026",
       logo: "blackrock.png",
       logoBgWhite: true,
