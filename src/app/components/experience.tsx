@@ -12,6 +12,7 @@ interface Experience {
   date: string;
   logo: string;
   logoBgWhite?: boolean;
+  logoSize?: number;
 }
 
 const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
@@ -43,7 +44,7 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2.5">
           <div className="flex items-center gap-3">
             <div className={`w-9 h-9 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm border border-white/[0.08] rounded-lg ${exp.logoBgWhite ? "bg-white" : "bg-white/[0.04]"}`}>
-              <Image src={`/logos/${exp.logo}`} alt={exp.company} width={28} height={28} className="object-contain" />
+              <Image src={`/logos/${exp.logo}`} alt={exp.company} width={exp.logoSize ?? 28} height={exp.logoSize ?? 28} className="object-contain" />
             </div>
             <div>
               <h3 className="font-display font-bold text-base leading-snug text-[oklch(0.92_0.01_80)]">
@@ -90,6 +91,16 @@ const ExperienceComponent = () => {
   const lineScaleY = useSpring(scrollYProgress, { stiffness: 80, damping: 25 });
 
   const experiences: Experience[] = [
+    {
+      title: "Summer Analyst",
+      company: "BlackRock",
+      location: "Singapore",
+      description: ["Aladdin", "Client Business"],
+      date: "Jun 2026 – Aug 2026",
+      logo: "blackrock.png",
+      logoBgWhite: true,
+      logoSize: 38,
+    },
     {
       title: "Data Scientist Intern",
       company: "GovTech",
