@@ -68,6 +68,22 @@ const HomeComponent = () => {
           <div className="flex items-center justify-center px-6 sm:px-12 lg:px-12 xl:px-20 py-10 sm:py-16 lg:py-0">
             <motion.div style={{ y: textY }} className="w-full max-w-lg text-center lg:text-left flex flex-col items-center lg:items-start">
 
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="lg:hidden relative w-36 h-36 sm:w-44 sm:h-44 mb-8 rounded-full overflow-hidden border border-[oklch(0.75_0.12_75/0.35)] shadow-[0_12px_36px_-8px_oklch(0.75_0.12_75/0.3)]"
+              >
+                <Image
+                  src="/mee.jpg"
+                  alt="Rohan Jaggi"
+                  fill
+                  className="object-cover object-[center_15%]"
+                  sizes="(max-width: 1023px) 176px, 0px"
+                  priority
+                />
+              </motion.div>
+
               <motion.p
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}

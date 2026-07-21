@@ -39,7 +39,7 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
       <motion.div
         whileHover={{ y: -2, boxShadow: "0 8px 32px -8px rgba(0,0,0,0.3)" }}
         transition={{ type: "spring", stiffness: 300, damping: 22 }}
-        className="group relative border border-white/[0.06] rounded-xl p-4 sm:p-5 bg-white/[0.02] transition-colors hover:border-white/[0.1] overflow-hidden"
+        className="group relative border border-white/[0.06] rounded-xl p-4 sm:p-5 bg-[oklch(0.16_0.008_250/0.92)] transition-colors hover:border-white/[0.1] overflow-hidden"
       >
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2.5">
           <div className="flex items-center gap-3">

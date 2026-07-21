@@ -41,7 +41,7 @@ const AboutComponent = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.75, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
             style={{ y: imageY }}
-            className="rounded-2xl overflow-hidden"
+            className="rounded-2xl overflow-hidden w-full max-w-[17rem] sm:max-w-sm mx-auto lg:max-w-none lg:mx-0"
           >
             <Image
               src="/about-pic.png"
